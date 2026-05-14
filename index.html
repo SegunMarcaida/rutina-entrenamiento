@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rutina Atletica — Futbol & Performance v5</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0a0a0a;
+  --white: #f5f2eb;
+  --cream: #ede9df;
+  --green: #2d5a27;
+  --green-light: #4a8c42;
+  --green-pale: #e8f0e6;
+  --amber: #b86b1a;
+  --amber-pale: #f5ead8;
+  --red: #9e2a2a;
+  --red-pale: #f5e0e0;
+  --blue: #2a4a7c;
+  --blue-pale: #e0e8f5;
+  --purple: #4a2a7c;
+  --purple-pale: #ede0f5;
+  --teal: #1a6b6b;
+  --teal-pale: #d8f0f0;
+  --gray: #5a5a5a;
+  --gray-light: #d0ccc4;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--white); font-family: 'DM Sans', sans-serif; color: var(--black); font-size: 14px; line-height: 1.6; }
+
+.header { background: var(--black); color: var(--white); padding: 52px 44px 40px; position: relative; overflow: hidden; }
+.header::after { content: 'MOVE'; position: absolute; right: -10px; bottom: -20px; font-family: 'Bebas Neue', sans-serif; font-size: 220px; color: rgba(255,255,255,0.025); letter-spacing: 6px; line-height: 1; pointer-events: none; }
+.h-tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--green-light); margin-bottom: 14px; }
+.header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 72px; line-height: 0.92; letter-spacing: 3px; margin-bottom: 18px; }
+.header h1 span { color: var(--teal); }
+.h-sub { color: rgba(245,242,235,0.5); font-size: 13px; font-weight: 300; max-width: 580px; line-height: 1.75; }
+.h-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 22px; }
+.pill { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); color: rgba(255,255,255,0.8); padding: 4px 13px; border-radius: 20px; font-size: 11px; font-family: 'DM Mono', monospace; letter-spacing: 1px; }
+
+.legend { background: var(--cream); border-bottom: 1px solid var(--gray-light); padding: 14px 44px; display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+.legend-title { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); }
+.legend-item { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--gray); }
+.dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.dot-1 { background: var(--green); } .dot-2 { background: var(--amber); } .dot-3 { background: var(--red); } .dot-sat { background: var(--blue); }
+
+.priority-table { background: var(--black); color: var(--white); border-radius: 8px; padding: 36px 44px; margin: 36px 44px; }
+.priority-table h2 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 3px; margin-bottom: 22px; color: rgba(255,255,255,0.88); }
+.pt-row { display: grid; grid-template-columns: 44px 1fr 1fr; padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.07); align-items: start; }
+.pt-row:last-child { border-bottom: none; }
+.pt-num { font-family: 'Bebas Neue', sans-serif; font-size: 28px; line-height: 1; color: rgba(255,255,255,0.14); }
+.pt-day-name { font-weight: 600; font-size: 14px; margin-bottom: 3px; }
+.pt-day-type { font-size: 12px; color: rgba(255,255,255,0.42); }
+.pt-miss { font-size: 12px; color: rgba(255,255,255,0.36); font-style: italic; line-height: 1.5; }
+
+.week-nav { padding: 36px 44px 0; display: flex; gap: 6px; flex-wrap: wrap; }
+.day-tab { padding: 9px 18px; border-radius: 4px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border: 1.5px solid transparent; transition: all 0.18s; background: var(--cream); color: var(--gray); }
+.day-tab:hover { border-color: var(--gray-light); color: var(--black); }
+.day-tab.active { background: var(--black); color: var(--white); border-color: var(--black); }
+.day-tab.p1 { border-left: 3px solid var(--green); } .day-tab.p2 { border-left: 3px solid var(--amber); }
+.day-tab.p3 { border-left: 3px solid var(--red); } .day-tab.psat { border-left: 3px solid var(--blue); }
+
+.content { padding: 28px 44px 80px; }
+.day-panel { display: none; } .day-panel.active { display: block; }
+
+.day-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-bottom: 32px; padding-bottom: 22px; border-bottom: 1px solid var(--gray-light); flex-wrap: wrap; }
+.day-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--gray); margin-bottom: 5px; }
+.day-name { font-family: 'Bebas Neue', sans-serif; font-size: 46px; line-height: 1; letter-spacing: 2px; }
+.day-focus { font-size: 13px; color: var(--gray); margin-top: 5px; }
+.day-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 7px; }
+.priority-badge { padding: 5px 14px; border-radius: 3px; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; }
+.p1-badge { background: var(--green-pale); color: var(--green); } .p2-badge { background: var(--amber-pale); color: var(--amber); }
+.p3-badge { background: var(--red-pale); color: var(--red); } .psat-badge { background: var(--blue-pale); color: var(--blue); }
+.time-badge { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gray); }
+
+.miss-alert { background: var(--cream); border: 1px solid var(--gray-light); border-left: 3px solid var(--amber); border-radius: 4px; padding: 13px 18px; margin-bottom: 28px; font-size: 12.5px; color: var(--gray); line-height: 1.6; }
+.miss-alert strong { color: var(--black); display: block; margin-bottom: 3px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-family: 'DM Mono', monospace; }
+
+/* BLOCKS */
+.block { margin-bottom: 20px; border-radius: 6px; overflow: hidden; border: 1px solid var(--gray-light); }
+.block-header { padding: 11px 18px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none; }
+.block-header-left { display: flex; align-items: center; gap: 12px; }
+.block-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; font-weight: 500; }
+.block-duration { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--gray); }
+.toggle-arrow { font-size: 9px; color: var(--gray); transition: transform 0.2s; margin-left: 10px; }
+.block.open .toggle-arrow { transform: rotate(180deg); }
+.block-body { display: none; } .block.open .block-body { display: block; }
+
+/* Block color themes */
+.b-move { background: #f4fbf9; border-color: #a8d8d0; }
+.b-move .block-header { background: #e0f5f0; } .b-move .block-label { color: var(--teal); }
+
+.b-strength { background: #f3f8f2; border-color: #b8d4b4; }
+.b-strength .block-header { background: #e4f0e2; } .b-strength .block-label { color: var(--green); }
+
+.b-power { background: #f2f4ff; border-color: #b8c0e4; }
+.b-power .block-header { background: #e4e8f8; } .b-power .block-label { color: var(--blue); }
+
+.b-hyp { background: #f7f2fc; border-color: #c8b4e0; }
+.b-hyp .block-header { background: #ede0f8; } .b-hyp .block-label { color: var(--purple); }
+
+.b-acc { background: #f5f4f0; border-color: #ccc8be; }
+.b-acc .block-header { background: #eceae4; } .b-acc .block-label { color: #4a4030; }
+
+.b-recover { background: #fdf9f4; border-color: #ddd5c5; }
+.b-recover .block-header { background: #f8f2e8; } .b-recover .block-label { color: #6b5a3e; }
+
+/* EXERCISES */
+.exercise { padding: 18px 18px 15px; border-bottom: 1px solid rgba(0,0,0,0.05); }
+.exercise:last-child { border-bottom: none; }
+.ex-top { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 4px; flex-wrap: wrap; }
+.ex-name { font-weight: 600; font-size: 15px; letter-spacing: -0.2px; }
+.ex-sets { font-family: 'DM Mono', monospace; font-size: 11.5px; white-space: nowrap; flex-shrink: 0; padding: 3px 10px; border-radius: 3px; font-weight: 500; }
+.sets-str { color: var(--green); background: var(--green-pale); }
+.sets-hyp { color: var(--purple); background: var(--purple-pale); }
+.sets-pow { color: var(--blue); background: var(--blue-pale); }
+.sets-mob { color: var(--teal); background: var(--teal-pale); }
+.ex-why { font-size: 12px; color: var(--gray); margin-bottom: 8px; font-style: italic; line-height: 1.55; }
+.ex-how { font-size: 13px; line-height: 1.75; color: #252525; margin-bottom: 10px; }
+.ex-how strong { font-weight: 600; color: var(--black); }
+.ex-footer { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.ex-alts { display: flex; gap: 5px; flex-wrap: wrap; align-items: center; }
+.alt-label { font-size: 10px; color: var(--gray); font-family: 'DM Mono', monospace; letter-spacing: 1px; text-transform: uppercase; }
+.alt-tag { background: var(--cream); border: 1px solid var(--gray-light); padding: 2px 8px; border-radius: 3px; font-size: 11px; font-family: 'DM Mono', monospace; color: var(--gray); }
+.yt-links { display: flex; flex-direction: column; gap: 3px; align-items: flex-end; }
+.yt-link { font-size: 11px; font-family: 'DM Mono', monospace; color: #a00; text-decoration: none; white-space: nowrap; }
+.yt-link::before { content: '▶  '; }
+.yt-link:hover { text-decoration: underline; }
+.section-note { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); padding: 9px 18px 7px; background: rgba(0,0,0,0.02); border-bottom: 1px solid rgba(0,0,0,0.04); }
+
+/* MOBILITY FLOW CARD — special visual treatment */
+.flow-card { margin: 10px 18px 14px; background: var(--black); color: var(--white); border-radius: 6px; padding: 16px 20px; }
+.flow-card-title { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 10px; }
+.flow-steps { display: flex; flex-wrap: wrap; gap: 6px; }
+.flow-step { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.12); padding: 4px 10px; border-radius: 3px; font-size: 12px; }
+.flow-arrow { color: rgba(255,255,255,0.25); font-size: 12px; display: flex; align-items: center; }
+
+@media (max-width: 640px) {
+  .header { padding: 36px 20px 28px; } .header h1 { font-size: 50px; }
+  .legend { padding: 12px 20px; gap: 14px; } .week-nav { padding: 22px 20px 0; }
+  .content { padding: 18px 20px 60px; } .priority-table { margin: 24px 20px; padding: 28px 20px; }
+  .pt-row { grid-template-columns: 36px 1fr; } .pt-miss { display: none; }
+  .day-header { flex-direction: column; } .day-meta { flex-direction: row; align-items: center; }
+  .ex-footer { flex-direction: column; } .yt-links { align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="h-tag">Programa Atletico Personalizado — v5</div>
+  <h1>STRENGTH,<br>POWER &<br><span>MOVEMENT</span></h1>
+  <div class="h-sub">Programa semanal de alto rendimiento para mediocampista avanzado. Fuerza maxima, potencia explosiva, hipertrofia de tren superior, y movilidad real integrada en cada sesion — cadera, columna toracica, tobillos y hombros. Inspirado en la filosofia de Vernon Griffith: la movilidad es fuerza dentro del rango de movimiento.</div>
+  <div class="h-pills">
+    <span class="pill">Avanzado</span>
+    <span class="pill">65–75 min/sesion</span>
+    <span class="pill">Hex Bar · Nordic · ATG</span>
+    <span class="pill">Hip CARs · Shin Box · Thoracic Flow</span>
+    <span class="pill">Futbol · Tenis · Surf</span>
+  </div>
+</div>
+
+<div class="legend">
+  <span class="legend-title">Prioridad</span>
+  <span class="legend-item"><span class="dot dot-1"></span>Esencial</span>
+  <span class="legend-item"><span class="dot dot-2"></span>Importante</span>
+  <span class="legend-item"><span class="dot dot-3"></span>Complementario</span>
+  <span class="legend-item"><span class="dot dot-sat"></span>Partido</span>
+</div>
+
+<div class="priority-table">
+  <h2>ORDEN DE PRIORIDAD SEMANAL</h2>
+  <div class="pt-row"><div class="pt-num">1</div><div><div class="pt-day-name">MIERCOLES — Fuerza Maxima + Potencia</div><div class="pt-day-type">Hex Bar DL · Sentadilla · Dominadas · Mobility Flow integrado</div></div><div class="pt-miss">Si lo perdés: hacelo el jueves AM, recorta 1 set por ejercicio.</div></div>
+  <div class="pt-row"><div class="pt-num">2</div><div><div class="pt-day-name">MARTES — Fuerza Unilateral + Movilidad de Cadera</div><div class="pt-day-type">Nordic · Estocadas · RDL · Shin Box · Hip CARs · Tobillo</div></div><div class="pt-miss">Si lo perdés: Shin Box Flow + Nordic Curls 3x8 (20 min).</div></div>
+  <div class="pt-row"><div class="pt-num">3</div><div><div class="pt-day-name">JUEVES — Hipertrofia Tren Superior + Movilidad Toracica</div><div class="pt-day-type">Press · Pull · OHP · Thoracic Flow · Hombro</div></div><div class="pt-miss">Si lo perdés: Press + Dominadas 4x8 + Thoracic Flow 10 min.</div></div>
+  <div class="pt-row"><div class="pt-num">4</div><div><div class="pt-day-name">DOMINGO — Movimiento Activo + Recuperacion</div><div class="pt-day-type">Full Body Mobility Flow · Zona 2 · Respiracion</div></div><div class="pt-miss">Minimo: 15 min de Hip Mobility Flow antes de dormir.</div></div>
+  <div class="pt-row"><div class="pt-num">5</div><div><div class="pt-day-name">VIERNES — Activacion Pre-Partido</div><div class="pt-day-type">Mobility + Activacion neuromuscular ligera</div></div><div class="pt-miss">Si lo perdés: llegá 15 min antes al partido.</div></div>
+  <div class="pt-row"><div class="pt-num">—</div><div><div class="pt-day-name">SABADO — Partido</div><div class="pt-day-type">FIFA 11+ · Partido · Vuelta a la calma</div></div><div class="pt-miss">Nunca saltear el calentamiento.</div></div>
+  <div class="pt-row"><div class="pt-num">—</div><div><div class="pt-day-name">LUNES — Ya ocupado</div><div class="pt-day-type">Tenis AM + Saltos/Sprints/Pasadas</div></div><div class="pt-miss">No modificar.</div></div>
+</div>
+
+<div class="week-nav">
+  <button class="day-tab p1 active" onclick="showDay('lun',this)">LUN</button>
+  <button class="day-tab p1" onclick="showDay('mar',this)">MAR</button>
+  <button class="day-tab p1" onclick="showDay('mie',this)">MIE</button>
+  <button class="day-tab p2" onclick="showDay('jue',this)">JUE</button>
+  <button class="day-tab p3" onclick="showDay('vie',this)">VIE</button>
+  <button class="day-tab psat" onclick="showDay('sab',this)">SAB</button>
+  <button class="day-tab p2" onclick="showDay('dom',this)">DOM</button>
+</div>
+
+<div class="content">
+
+<!-- ===== LUNES ===== -->
+<div id="day-lun" class="day-panel active">
+  <div class="day-header">
+    <div><div class="day-label">Dia 1</div><div class="day-name">LUNES</div><div class="day-focus">Tenis AM + Saltos, Sprints y Pasadas — dia completo</div></div>
+    <div class="day-meta"><span class="priority-badge p1-badge">YA PROGRAMADO</span><span class="time-badge">No agregar</span></div>
+  </div>
+  <div class="miss-alert">
+    <strong>Dia bloqueado</strong>
+    Maximo estimulo neurologico de la semana: tenis (velocidad de reaccion, coordinacion, sprints cortos) mas potencia neuromuscular con saltos y aceleraciones. No agregar nada.<br><br>
+    Opcional antes de dormir — 5 min: Cossack Squat lento x5 por lado + rotacion toracica en lunge x5 por lado. Mantiene la movilidad activa sin estimulo de fatiga.
+  </div>
+</div>
+
+<!-- ===== MARTES ===== -->
+<div id="day-mar" class="day-panel">
+  <div class="day-header">
+    <div><div class="day-label">Dia 2 — Prioridad #2</div><div class="day-name">MARTES</div><div class="day-focus">Movilidad de Cadera + Fuerza Unilateral + Prevencion</div></div>
+    <div class="day-meta"><span class="priority-badge p1-badge">ESENCIAL</span><span class="time-badge">65–75 min</span></div>
+  </div>
+  <div class="miss-alert">
+    <strong>Si perdés este dia</strong>
+    Prioridad: Shin Box Flow 8 min + Nordic Curls 3x8 + Tibialis Raises 3x20. Son 25 minutos que preservan lo mas critico de la sesion.
+  </div>
+
+  <!-- MOBILITY FLOW 1: HIP + ANKLE -->
+  <div class="block b-move open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-header-left"><div class="block-label">Movement Prep — Hip & Ankle Exploration</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">18 min</div><div class="toggle-arrow">▼</div></div>
+    </div>
+    <div class="block-body">
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Shin Box Flow — Transicion con Rotacion Toracica</div><div class="ex-sets sets-mob">6–8 min continuos, explorando</div></div>
+        <div class="ex-why">El ejercicio de cadera mas completo que existe — combina rotacion interna y externa, carga los rangos finales activamente, e integra rotacion toracica simultaneamente. Es la base del trabajo de Vernon Griffith con atletas de NFL y NBA. Mucho mas dinamico y funcional que el 90/90 estatico.</div>
+        <div class="ex-how">Senta en el suelo con ambas rodillas dobladas a 90 grados lateralmente (shin box). <strong>Transicion:</strong> pasa de un lado al otro levantando la cadera del suelo y rotando las rodillas al lado opuesto. No uses las manos para ayudarte — la cadera levanta sola. <strong>Rotacion toracica:</strong> en cada posicion, abre el brazo del lado frontal hacia el techo siguiendo con la vista, rotando la columna toracica. Regresa. <strong>Exploracion:</strong> no es una rutina fija — explora distintas posiciones, inclina el torso hacia la rodilla delantera, estira el flexor del lado trasero. Vernon dice: "No te muevas por el ejercicio, explorat el movimiento." Dedica tiempo real a las posiciones que sientas mas tensas.</div>
+        <div class="flow-card">
+          <div class="flow-card-title">Secuencia de Exploracion</div>
+          <div class="flow-steps">
+            <span class="flow-step">Shin Box pasivo 30 seg</span><span class="flow-arrow">→</span>
+            <span class="flow-step">Transicion controlada x5</span><span class="flow-arrow">→</span>
+            <span class="flow-step">Rotacion toracica x5 por lado</span><span class="flow-arrow">→</span>
+            <span class="flow-step">Lean forward sobre rodilla delantera</span><span class="flow-arrow">→</span>
+            <span class="flow-step">Hip lift activo x3</span><span class="flow-arrow">→</span>
+            <span class="flow-step">Repite explorando variaciones</span>
+          </div>
+        </div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Con mano en pared para balance</span><span class="alt-tag">Con tobillo en bloque</span></div>
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/watch?v=eU8_Lxdvfc0" target="_blank">Vernon Griffith — Hip & Spine Mobility Routine</a>
+            <a class="yt-link" href="https://www.youtube.com/watch?v=G6z99P_3GPs" target="_blank">Vernon Griffith — Mobility Deep Dive</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Hip CARs — Controlled Articular Rotations</div><div class="ex-sets sets-mob">3 rotaciones lentas por lado (cada una dura 45–60 seg)</div></div>
+        <div class="ex-why">Los CARs de cadera son el ejercicio de mantenimiento articular mas importante que existe. Llevan la articulacion por su rango completo de movimiento bajo tension activa — lubrica, mantiene el espacio articular y construye control neuromuscular en posiciones donde normalmente no hay fuerza. Vernon los usa con todos sus atletas profesionales diariamente.</div>
+        <div class="ex-how">De pie, una mano apoyada en el rack. Levanta la rodilla hacia el pecho (flexion), luego lleva la rodilla hacia afuera (abduccion), luego hacia atras y abajo completando el circulo — todo en un solo movimiento continuo, lento, con maxima tension activa. El tronco no rota — solo la cadera. Cuanto mas lento y mas rango, mejor. Al completar la vuelta, invierte la direccion. <strong>Clave de Vernon:</strong> "Empuja contra la resistencia imaginaria en cada grado del recorrido — no es una vuelta pasiva."</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">De cuatro patas (quadruped CARs)</span><span class="alt-tag">Colgado de la barra</span></div>
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/watch?v=kF0P4BL26Q0" target="_blank">Hip CARs — tutorial completo</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Ankle CARs + Calf Raises en Rango Completo</div><div class="ex-sets sets-mob">2 x 8 CARs por tobillo + 3 x 15 calf raises</div></div>
+        <div class="ex-why">El tobillo es la articulacion mas restrictiva en el futbol y la mas ignorada en el entrenamiento. Movilidad de tobillo limitada compensa en rodilla y cadera, creando lesiones en cadena. Los CARs de tobillo mas calf raises excentricos construyen control y rango simultaneamente.</div>
+        <div class="ex-how"><strong>Ankle CARs:</strong> Sentado o parado en un pie, rota el tobillo lentamente en maxima circunferencia — punta abajo, afuera, arriba, adentro — bajo tension activa en todo el recorrido. <strong>Calf Raises:</strong> En el borde de un step. Baja el talon por debajo del nivel del step (3 seg), sube hasta maxima punta (1 seg). El rango extendido abajo es lo que construye control real del tobillo.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Unilateral (mas demandante)</span><span class="alt-tag">Con carga (mancuerna en mano)</span></div>
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/watch?v=zKlPcurmZN0" target="_blank">Ankle CARs y movilidad de tobillo</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Tibialis Raise con Carga Progresiva</div><div class="ex-sets sets-mob">3 x 20–25 reps</div></div>
+        <div class="ex-why">El tibial anterior es el musculo mas olvidado del atletismo. Fortalecerlo elimina el shin splints, mejora la absorcion de impacto en aterrizajes y refuerza el tobillo para cambios de direccion explosivos. Vernon lo incluye en todos sus programas de preparacion atletica.</div>
+        <div class="ex-how">Espalda y talones contra la pared, pies a 20 cm. Levanta los dedos hacia la espinilla al maximo, mantene 1 seg, baja lento (3 seg). Progresa poniendo un plato sobre los muslos. Version avanzada: parado sobre un step, talon al nivel del step, sube los dedos del pie.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Sentado con banda en pie</span><span class="alt-tag">En step para mayor rango</span></div>
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/watch?v=T7JSfQBBMtI" target="_blank">Tibialis Raises — KOT</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FUERZA UNILATERAL -->
+  <div class="block b-strength open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-header-left"><div class="block-label">Fuerza Unilateral — Tren Inferior</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">30 min</div><div class="toggle-arrow">▼</div></div>
+    </div>
+    <div class="block-body">
+
+      <div class="section-note">Superset A1/A2 y B1/B2 — 90 seg de descanso entre pares</div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">A1 — Nordic Hamstring Curl</div><div class="ex-sets sets-str">4 x 6–10 reps (excentrico lento — 4 seg bajando)</div></div>
+        <div class="ex-why">El ejercicio de prevencion de isquiotibiales con mayor evidencia en el mundo. Reduce desgarros hasta un 51% en futbolistas. Entrena la fuerza excentrica del biceps femoral — exactamente lo que falla en los sprints de alta velocidad.</div>
+        <div class="ex-how">Arrodillado, pies bajo el rack. Cuerpo recto de rodillas a cabeza — no quiebres la cadera. Inclinacion hacia adelante LENTAMENTE (4 seg) resistiendo con los isquiotibiales al maximo. Cuando no aguantes mas, las manos tocan el suelo y te impulsas suavemente de vuelta. La primera semana vas a tener mucha agujeta — normal y correcto. Aumenta el rango semana a semana.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Asistido con banda</span><span class="alt-tag">Nordic en TRX</span></div>
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/watch?v=_e9vFU9-tkc" target="_blank">Nordic Curl — setup completo E3 Rehab</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">A2 — Walking Lunges con Mancuernas</div><div class="ex-sets sets-str">4 x 10 pasos por lado (carga real)</div></div>
+        <div class="ex-why">El ejercicio unilateral mas funcional para el futbol. Replica la mecanica de sprint con carga. Las ultimas 2 reps de cada serie deben ser un esfuerzo real — si no, la carga es demasiado liviana.</div>
+        <div class="ex-how">Mancuernas pesadas en cada mano. Paso largo, rodilla trasera casi toca el suelo. La rodilla delantera puede — y debe — avanzar sobre los dedos del pie. Tronco erguido. Empuja el suelo desde abajo y avanza al siguiente paso. No uses mancuernas demasiado livianas.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Estocada reversa (mas rodilla)</span><span class="alt-tag">Bulgarian split squat</span></div>
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/watch?v=D7KaRcUTQeE" target="_blank">Walking Lunges — tecnica avanzada</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">B1 — ATG Split Squat con Carga</div><div class="ex-sets sets-str">3 x 8 reps por lado</div></div>
+        <div class="ex-why">Fuerza y desarrollo tendinoso del tendón patelar en rango completo. La carga progresiva es lo que construye rodillas a prueba de balas segun el KOT methodology.</div>
+        <div class="ex-how">Rodilla trasera en el suelo o levemente elevada. Rodilla delantera avanza sobre los dedos. Baja lento (3 seg) hasta que el muslo posterior toca el gemelo. Sube explosivo. Mancuernas a los costados o barra en espalda.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Talon elevado si tobillo limita</span><span class="alt-tag">Isometrico si tendón sensible</span></div>
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/watch?v=g6KrlrOq4mw" target="_blank">KOT — ATG Split Squat cargado</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">B2 — Romanian Deadlift con Mancuernas</div><div class="ex-sets sets-str">3 x 10 reps (rango completo)</div></div>
+        <div class="ex-why">Fuerza de isquiotibiales proximales — complementa al Nordic que trabaja la zona distal. Juntos cubren toda la longitud del biceps femoral, que es lo que previene desgarros en sprint.</div>
+        <div class="ex-how">Bisagra de cadera empujando el culo hacia atras, espalda absolutamente recta, rodillas levemente flexionadas. Las mancuernas bajan por las piernas. Hasta el estiramiento maximo (no necesariamente el suelo). Sube iniciando con los gluteos.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">RDL unilateral (1 pierna)</span><span class="alt-tag">Sumo RDL</span></div>
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/watch?v=JCXUYuzwNrM" target="_blank">Romanian Deadlift — tecnica perfecta</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COSSACK + CORE -->
+  <div class="block b-acc open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-header-left"><div class="block-label">Loaded Mobility + Core</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">15 min</div><div class="toggle-arrow">▼</div></div>
+    </div>
+    <div class="block-body">
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Cossack Squat con Mancuerna</div><div class="ex-sets sets-mob">3 x 8 reps por lado (carga progresiva)</div></div>
+        <div class="ex-why">Uno de los ejercicios favoritos de Vernon Griffith para movilidad cargada de cadera. Combina sentadilla lateral, estiramiento activo de adductores y fuerza unilateral. Altamente transferible a los cambios de direccion del futbol.</div>
+        <div class="ex-how">De pie con pies mas anchos que los hombros. Desplaza el peso hacia un lado doblando esa rodilla mientras la pierna opuesta queda estirada con el pie flat (no en punta). Baja lo mas posible — el objetivo es que el culo casi toque el talon. Sostén una mancuerna contra el pecho o colgando. Sube empujando el suelo con el pie activo. El pie de la pierna estirada puede rotar hacia afuera segun la movilidad de tobillo.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Sin carga (aprendizaje)</span><span class="alt-tag">Con barra en espalda</span><span class="alt-tag">Con pausa abajo</span></div>
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/watch?v=S9F4bWMoZRQ" target="_blank">Cossack Squat — tutorial y progresion</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Reverse Nordic Curl</div><div class="ex-sets sets-str">3 x 8–12 reps (excentrico lento)</div></div>
+        <div class="ex-why">Fortalece el cuadriceps en rango largo. Junto con el ATG, construye rodillas a prueba de balas. Previene sindrome patelofemoral y reduce el riesgo de LCA.</div>
+        <div class="ex-how">Arrodillado en colchoneta. Cuerpo recto de rodillas a cabeza. Inclinate hacia atras resistiendo con los cuadriceps (4–5 seg). Llega lo mas lejos posible sin perder la alineacion. Vuelve con un pequeño impulso de manos. El rango aumenta semana a semana.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Asistido con banda</span><span class="alt-tag">Straddle reverse nordic</span></div>
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/live/GtBxjoLlHyA" target="_blank">Reverse Nordic — guia completa</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Ab Wheel — Rango Progresivo</div><div class="ex-sets sets-str">4 x 8–10 reps</div></div>
+        <div class="ex-why">Core anti-extension de mayor demanda disponible. Estabilizacion del tronco identica a la demanda de sprint y remate.</div>
+        <div class="ex-how">Version de pie si ya dominas la arrodillada: rango corto al inicio (30–40 cm), aumentando. Lumbar nunca se hunde. Tension en abdominales y lats, no en espalda baja.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Arrodillado (inicial)</span><span class="alt-tag">Con banda asistida</span></div>
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/watch?v=CxS10wcWq2s" target="_blank">Ab Wheel — tutorial y progresion</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== MIERCOLES ===== -->
+<div id="day-mie" class="day-panel">
+  <div class="day-header">
+    <div><div class="day-label">Dia 3 — PRIORIDAD #1</div><div class="day-name">MIERCOLES</div><div class="day-focus">Fuerza Maxima + Potencia + Thoracic Flow integrado</div></div>
+    <div class="day-meta"><span class="priority-badge p1-badge">NO SALTEAR</span><span class="time-badge">65–75 min</span></div>
+  </div>
+  <div class="miss-alert">
+    <strong>Si perdés este dia</strong>
+    Hacelo el jueves AM sin falta, reduciendo 1 set por ejercicio. Este dia es el nucleo de toda la progresion de fuerza y potencia de la semana.
+  </div>
+
+  <!-- THORACIC MOBILITY PRIMER -->
+  <div class="block b-move open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-header-left"><div class="block-label">Movement Primer — Thoracic Spine & Hip</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">12 min</div><div class="toggle-arrow">▼</div></div>
+    </div>
+    <div class="block-body">
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">World's Greatest Stretch — Lunge con Rotacion Toracica</div><div class="ex-sets sets-mob">3 x 8 reps por lado (lento, explorando)</div></div>
+        <div class="ex-why">El mejor ejercicio de calentamiento del mundo segun practicamente todos los preparadores fisicos de alto rendimiento. Integra movilidad de tobillo, cadera, columna toracica y hombro en un solo patron continuo — exactamente la cadena que el futbol demanda.</div>
+        <div class="ex-how">Paso largo hacia adelante en estocada, rodilla trasera estirada. <strong>Paso 1:</strong> Apoya la mano del mismo lado que el pie adelantado en el suelo, junto al pie. <strong>Paso 2:</strong> Abre el brazo opuesto hacia el techo rotando la columna toracica — sigue el brazo con la vista. Mantene 2 seg. <strong>Paso 3:</strong> Baja la mano y deja caer la cadera hacia el suelo para estirar el flexor. <strong>Paso 4:</strong> Empuja hacia atras al punto de partida. Cada rep explora mas rango — no es mecanico.</div>
+        <div class="flow-card">
+          <div class="flow-card-title">Secuencia por Rep</div>
+          <div class="flow-steps">
+            <span class="flow-step">Lunge largo</span><span class="flow-arrow">→</span>
+            <span class="flow-step">Mano al suelo (interior)</span><span class="flow-arrow">→</span>
+            <span class="flow-step">Rotacion toracica al techo</span><span class="flow-arrow">→</span>
+            <span class="flow-step">Cadera al suelo (hip flexor)</span><span class="flow-arrow">→</span>
+            <span class="flow-step">Reset y avanza</span>
+          </div>
+        </div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Solo la rotacion toracica</span><span class="alt-tag">Con rotacion de tobillo</span></div>
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/watch?v=J2WnGSbJ7DM" target="_blank">World's Greatest Stretch — tutorial</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Thoracic CARs — Rotaciones Activas de Columna</div><div class="ex-sets sets-mob">3 x 5 rotaciones lentas por lado</div></div>
+        <div class="ex-why">La columna toracica es la articulacion de rotacion del cuerpo — cada vez que pateas, pasas o corres estas rotando la toracica. Con limitaciones de movilidad toracica, el cuerpo compensa en la lumbar, que no esta disenada para rotar — creando lesiones de espalda baja. Vernon la incluye en todos los calentamientos.</div>
+        <div class="ex-how">Sentado o de pie, brazos cruzados sobre el pecho o manos en la nuca. Rota lentamente hacia un lado llegando al maximo rango — no es un swing. En el punto final, aprieta los musculos rotadores como si empujaras contra una resistencia imaginaria 3 seg (CARS activos). Regresa lento. Sin mover la pelvis — si la pelvis rota, estas compensando.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">En quadruped (cuatro patas)</span><span class="alt-tag">Con barra en espalda</span></div>
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/watch?v=VBUXs4IeUlA" target="_blank">Thoracic Spine CARs — tutorial</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Goblet Squat Isometrico + Hip Pry</div><div class="ex-sets sets-mob">3 x 45 seg (exploracion activa abajo)</div></div>
+        <div class="ex-why">Abre la cadera en flexion profunda antes de la sentadilla pesada. El "hip pry" (palanca con los codos sobre las rodillas) fuerza la cadera a abrirse activamente — no es un estiramiento pasivo, es fuerza dentro del rango.</div>
+        <div class="ex-how">Sostén una mancuerna o kettlebell contra el pecho. Sentadilla al fondo. En esa posicion, apoya los codos en el interior de las rodillas y usa los triceps para empujarlas hacia afuera suavemente. Mantene la espalda recta y la posicion erecta. Mueve la cadera lentamente de un lado al otro. Levantate, respira, vuelve. No es descanso — es trabajo activo de movilidad.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Sin peso (manos juntas)</span><span class="alt-tag">Con rotacion lateral de torso</span></div>
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/watch?v=MxcPzXQV-t8" target="_blank">Goblet Squat Hip Pry — tutorial</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- POTENCIA -->
+  <div class="block b-power open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-header-left"><div class="block-label">Potencia — Activacion Neurologica</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">8 min</div><div class="toggle-arrow">▼</div></div>
+    </div>
+    <div class="block-body">
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Box Jump o Broad Jump</div><div class="ex-sets sets-pow">5 x 3 reps — maxima intencion, descanso completo</div></div>
+        <div class="ex-why">La potencia SIEMPRE va antes de la fuerza maxima — el sistema nervioso esta fresco y recluta el maximo de unidades motoras. Esto ademas aumenta el rendimiento en las series de fuerza posteriores.</div>
+        <div class="ex-how">100% de intencion en cada salto. Descansa 60–90 seg completos entre series. Si el salto 3 es notablemente peor que el 1, para ahi. Calidad neurologica, no resistencia.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Salto vertical con contramovimiento</span><span class="alt-tag">Salto unilateral</span></div>
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/watch?v=NBY9-kTuHEk" target="_blank">Box Jump — tecnica y progresion</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FUERZA PRINCIPAL -->
+  <div class="block b-strength open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-header-left"><div class="block-label">Fuerza Maxima Bilateral</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">28 min</div><div class="toggle-arrow">▼</div></div>
+    </div>
+    <div class="block-body">
+
+      <div class="section-note">Descanso 2.5–3 min entre series pesadas — no negociar</div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Hex Bar Deadlift</div><div class="ex-sets sets-str">5 x 3 @ 85–90% + 1 x AMRAP @ 75%</div></div>
+        <div class="ex-why">El deadlift con hexagonal es el ejercicio atletico mas transferible al futbol — mayor activacion de cuadriceps, posicion erecta identica al salto vertical, menos carga en la columna. Superior al convencional para atletas de campo.</div>
+        <div class="ex-how">Parate en el centro de la hex. Agarra las manijas altas. Cadera alta, espalda recta, mirada al frente. Empuja el suelo hacia abajo con los dos pies simultaneamente. La barra sube en linea recta. Lockout completo arriba: gluteos apretados, caderas extendidas. Aumenta la carga semana a semana aunque sea 2.5 kg.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Si no hay hex:</span><span class="alt-tag">Peso muerto convencional</span><span class="alt-tag">Con mancuernas</span></div>
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/watch?v=vMLrPOB0BHI" target="_blank">Hex Bar Deadlift — tecnica atletica</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Sentadilla Trasera — Barra Alta</div><div class="ex-sets sets-str">4 x 4 @ 82–87%</div></div>
+        <div class="ex-why">Constructor de potencia de piernas. 4 x 4 en rango del 82–87% es el punto optimo donde fuerza y velocidad de ejecucion coexisten. La intencion de velocidad en la subida es clave incluso con cargas altas.</div>
+        <div class="ex-how">Barra alta. Pies a ancho de hombros, puntas levemente afuera. Baja en 2 seg, sube lo mas rapido posible — intencion de velocidad. Columna neutra durante todo el movimiento.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Safety bar squat</span><span class="alt-tag">Sentadilla con pausa</span></div>
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/watch?v=bEv6CCg2BC8" target="_blank">Back Squat — Jeff Nippard</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Dominadas con Peso — Progresion Lineal</div><div class="ex-sets sets-str">5 x 5 (aumentar carga cada semana)</div></div>
+        <div class="ex-why">Fuerza de traccion vertical con progresion lineal. 5 x 5 construye fuerza y masa simultaneamente. Equilibra el empuje dominante del futbol con traccion vertical real.</div>
+        <div class="ex-how">Cinturon con mancuerna. Colgado muerto al inicio de cada rep. Inicia deprimiendo las escapulas. Lento en la bajada (2–3 seg). Aumenta 2.5 kg por semana mientras puedas.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Chin-up (supino)</span><span class="alt-tag">Lat pulldown si no alcanza</span></div>
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/watch?v=4ysmBV1cR-Q" target="_blank">Weighted Pull-Ups — tecnica y progresion</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CORE PESADO -->
+  <div class="block b-acc open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-header-left"><div class="block-label">Core Pesado + Cadena Posterior</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">15 min</div><div class="toggle-arrow">▼</div></div>
+    </div>
+    <div class="block-body">
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Farmer Walk Pesado</div><div class="ex-sets sets-str">4 x 30 metros (mancuernas maximas)</div></div>
+        <div class="ex-why">Grip, core isometrico de alta intensidad, estabilidad de hombro bajo carga maxima. Uno de los ejercicios funcionales mas subutilizados.</div>
+        <div class="ex-how">Las mancuernas mas pesadas del gimnasio. Torso recto, hombros atras y abajo. Camina rapido y controlado. 90 seg de descanso entre series.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Suitcase carry un lado</span><span class="alt-tag">Overhead carry</span></div>
+          <div class="yt-links"><a class="yt-link" href="https://www.youtube.com/watch?v=VBobkldqqvk" target="_blank">Farmer Walk — tecnica correcta</a></div>
+        </div>
+      </div>
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Back Extension con Peso + QL Extension</div><div class="ex-sets sets-str">3 x 12 cada uno (back ext + QL superseteados)</div></div>
+        <div class="ex-why">Cadena posterior baja y cuadrado lumbar — el estabilizador lateral de la columna mas importante para cambios de direccion y prevencion de lesiones de espalda baja.</div>
+        <div class="ex-how"><strong>Back Ext:</strong> Banco de hiperextensiones, plato en el pecho. Baja perpendicular al suelo, sube a linea recta. <strong>QL:</strong> De pie, mancuerna a un lado. Inclina lateralmente 4 seg, vuelve controlado usando el QL opuesto.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Good Morning con barra</span><span class="alt-tag">Side plank con elevacion</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== JUEVES ===== -->
+<div id="day-jue" class="day-panel">
+  <div class="day-header">
+    <div><div class="day-label">Dia 4 — Prioridad #3</div><div class="day-name">JUEVES</div><div class="day-focus">Hipertrofia Tren Superior + Movilidad Toracica y de Hombro</div></div>
+    <div class="day-meta"><span class="priority-badge p2-badge">IMPORTANTE</span><span class="time-badge">65–75 min</span></div>
+  </div>
+  <div class="miss-alert">
+    <strong>Si perdés este dia</strong>
+    Press de banca 4x8 + Dominadas 4x8 + Thoracic Flow 10 min. Son 35 minutos que mantienen el estimulo de tren superior.
+  </div>
+
+  <!-- SHOULDER + THORACIC MOBILITY -->
+  <div class="block b-move open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-header-left"><div class="block-label">Movement Prep — Shoulder & Thoracic Flow</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">16 min</div><div class="toggle-arrow">▼</div></div>
+    </div>
+    <div class="block-body">
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Shoulder CARs — Rotaciones Articulares Controladas</div><div class="ex-sets sets-mob">3 x 5 rotaciones por lado (cada una 40–50 seg)</div></div>
+        <div class="ex-why">El hombro es la articulacion mas lesionada en deportes de raqueta. Los CARs de hombro mantienen el espacio articular, mejoran el control neuromuscular en rangos finales y reducen el riesgo de desgarro del manguito rotador. Fundamental para tenis, padel y surf.</div>
+        <div class="ex-how">De pie, un brazo pegado al cuerpo. Lentamente lleva el brazo hacia adelante (flexion), luego hacia arriba (elevacion), luego hacia atras (extension), luego hacia abajo completando el circulo completo. En cada grado del recorrido, activa los musculos del hombro como si empujaras contra resistencia. El cuerpo no se mueve — solo el brazo. Al completar, invierte la direccion.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Apoyado en pared (escápula fija)</span><span class="alt-tag">Con carga liviana (1–2 kg)</span></div>
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/watch?v=5JQ-dHYJFug" target="_blank">Shoulder CARs — tutorial</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Thread the Needle — Rotacion Toracica en Cuatro Patas</div><div class="ex-sets sets-mob">3 x 10 reps por lado</div></div>
+        <div class="ex-why">Movilidad toracica especifica para el press y el pull. La columna toracica rigida te impide extender completamente el hombro en el press overhead y te limita la traccion en las dominadas. Vernon lo usa extensamente con sus atletas de NFL antes del trabajo de tren superior.</div>
+        <div class="ex-how">En cuatro patas, manos bajo hombros, rodillas bajo caderas. Desliza una mano por el suelo pasando por debajo del cuerpo hacia el lado opuesto — el hombro y la cabeza bajan mientras la columna toracica rota. Llega hasta el maximo rango toracico (la cadera no rota). Regresa y abre hacia el techo siguiendo el brazo con la vista. Son dos direcciones en cada rep.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Con mano en pared al abrir</span><span class="alt-tag">Con rotacion de tobillo añadida</span></div>
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/watch?v=q5jpn1RoJRg" target="_blank">Thread the Needle — thoracic mobility</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Open Book — Rotacion Lateral Supina con Cadera Fija</div><div class="ex-sets sets-mob">2 x 8 reps por lado (lento, en pausa)</div></div>
+        <div class="ex-why">Aislamiento de rotacion toracica en posicion de no-compensacion — la cadera fija obliga a que el movimiento venga de la toracica pura. Excelente para atletas de deportes de rotacion como futbol, tenis y surf.</div>
+        <div class="ex-how">Recostado de lado, rodillas a 90 grados apiladas. Brazos extendidos al frente. Abre el brazo superior hacia el lado opuesto siguiendo con la vista — la columna toracica rota, la cadera se queda fija. Mantene 3 seg en el punto maximo. Regresa. No dejes que la rodilla de arriba levante del suelo.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Con rodillo bajo rodillas</span><span class="alt-tag">Con peso liviano en mano</span></div>
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/watch?v=BbT_7vwHBO0" target="_blank">Open Book — thoracic rotation</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Band Pull-Apart + Face Pull — Activacion de Escapula</div><div class="ex-sets sets-mob">3 x 20 pull-apart + 3 x 15 face pull</div></div>
+        <div class="ex-why">Activa los retractores de la escapula y el manguito rotador antes del trabajo de empuje pesado. Previene la postura anteriorizada de hombro que lleva a lesiones en deportes de raqueta.</div>
+        <div class="ex-how"><strong>Pull-Apart:</strong> Banda a la altura del pecho, brazos extendidos. Abre la banda hacia los lados apretando las escapulas. <strong>Face Pull:</strong> Banda anclada alta, tira hacia la cara con los codos altos. Al final del movimiento, rota los antebrazos hacia arriba formando una W.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">YTW con mancuernas livianas</span><span class="alt-tag">Cable face pull</span></div>
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/watch?v=GPwvS56XWBk" target="_blank">Y Raises + Band Work — hombro bulletproof</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- POTENCIA TREN SUPERIOR -->
+  <div class="block b-power open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-header-left"><div class="block-label">Potencia Tren Superior</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">8 min</div><div class="toggle-arrow">▼</div></div>
+    </div>
+    <div class="block-body">
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Medicine Ball Chest Pass o Slam</div><div class="ex-sets sets-pow">4 x 5 reps — maxima velocidad</div></div>
+        <div class="ex-why">Potencia de empuje horizontal — misma cadena que un pase de pecho, disputa aerea o remate. Entrena el SNC para generar fuerza rapidamente en el tren superior.</div>
+        <div class="ex-how">Chest Pass: Contra la pared, lanzamiento con maxima extension de codos y pectorales. Agarra el rebote sin pausa. Cada rep al 100%.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Push-up explosivo (manos despegan)</span><span class="alt-tag">Rotational slam</span></div>
+          <div class="yt-links"><a class="yt-link" href="https://www.youtube.com/watch?v=6GGE9r5sVIE" target="_blank">Medicine Ball Chest Pass</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HIPERTROFIA -->
+  <div class="block b-hyp open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-header-left"><div class="block-label">Hipertrofia Tren Superior — Empuje + Traccion</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">30 min</div><div class="toggle-arrow">▼</div></div>
+    </div>
+    <div class="block-body">
+
+      <div class="section-note">Rangos de hipertrofia: 8–12 reps, 90–120 seg descanso, ultima rep dificil</div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Press de Banca con Mancuernas</div><div class="ex-sets sets-hyp">4 x 8–10 reps</div></div>
+        <div class="ex-why">Masa y fuerza de pectoral, deltoides anterior y triceps. Tren superior balanceado es esencial para el rendimiento fisico general y para la resistencia en disputas de contacto.</div>
+        <div class="ex-how">Mancuernas en el banco. Codos a 45–60 grados del cuerpo. Baja hasta leve estiramiento del pectoral. Sube explosivo pero controlado. Alterna con press inclinado (30 grados) para pectoral superior.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Press inclinado 30 grados</span><span class="alt-tag">Fondos con peso</span></div>
+          <div class="yt-links"><a class="yt-link" href="https://www.youtube.com/watch?v=VmB1G1K7v94" target="_blank">Dumbbell Bench Press — Jeff Nippard</a></div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Remo con Mancuerna — 1 Brazo (Kroc Row)</div><div class="ex-sets sets-hyp">4 x 10–12 reps por lado</div></div>
+        <div class="ex-why">Traccion horizontal pesada — dorsal, biceps, romboides y trapecio medio. Esencial para el equilibrio muscular. La version Kroc (carga maxima, rango largo) es la mas efectiva para masa de espalda.</div>
+        <div class="ex-how">Rodilla y mano en el banco. Tira directamente hacia la cadera. En el punto mas alto, aprieta el dorsal 1 seg. Baja completamente con estiramiento. Usa carga real donde las ultimas 3 reps son un esfuerzo.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Remo pendlay con barra</span><span class="alt-tag">T-bar row</span></div>
+          <div class="yt-links"><a class="yt-link" href="https://www.youtube.com/watch?v=pYcpY20QaE8" target="_blank">Dumbbell Row — tecnica correcta</a></div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Overhead Press con Mancuernas</div><div class="ex-sets sets-hyp">3 x 10 reps</div></div>
+        <div class="ex-why">Deltoides medio y anterior, triceps y core bajo carga vertical. El OHP de pie es altamente funcional — exige estabilidad de core en cada rep.</div>
+        <div class="ex-how">De pie, mancuernas a la altura de los hombros. Presiona hasta extension completa sin hiperarquear la lumbar. Nucleo apretado. Baja controlado.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">OHP con barra (mas carga)</span><span class="alt-tag">Press Arnold</span></div>
+          <div class="yt-links"><a class="yt-link" href="https://www.youtube.com/watch?v=CnBmiBqp-AI" target="_blank">Overhead Press — Jeff Nippard</a></div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Fondos en Paralelas con Peso</div><div class="ex-sets sets-hyp">3 x 8–10 reps + drop set final</div></div>
+        <div class="ex-why">Fuerza compuesta de empuje — pectoral inferior, triceps y deltoides anterior. Con carga progresiva es de primer orden para hipertrofia. El drop set final maximiza el volumen en poco tiempo.</div>
+        <div class="ex-how">Cinturon con mancuerna. Baja hasta que hombros esten a la altura de las manos. Sube explosivo. Ultimo set: quita el peso y hace reps hasta el fallo.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Fondos en banco</span><span class="alt-tag">Press declinado</span></div>
+          <div class="yt-links"><a class="yt-link" href="https://www.youtube.com/watch?v=yN6Q1UI_xkE" target="_blank">Weighted Dips — tecnica y progresion</a></div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Curl de Biceps Inclinado + Rotacion Externa de Hombro</div><div class="ex-sets sets-hyp">3 x 12 curl + 3 x 15 rotacion externa (superseteados)</div></div>
+        <div class="ex-why">El curl inclinado maximiza el reclutamiento del biceps. La rotacion externa de hombro al final protege el manguito rotador despues de todo el trabajo de empuje y evita compensaciones que llevan a lesiones en tenis.</div>
+        <div class="ex-how"><strong>Curl:</strong> Banco a 45 grados, brazos colgando naturalmente hacia atras. Sube sin mover los codos. Baja en 3 seg completos. <strong>Rotacion externa:</strong> Recostado de lado, codo a 90 grados, rota el antebrazo hacia afuera lento.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Curl martillo (braquial)</span><span class="alt-tag">Face pull en vez de rot. externa</span></div>
+          <div class="yt-links"><a class="yt-link" href="https://www.youtube.com/watch?v=soxrZlIl35U" target="_blank">Incline Dumbbell Curl — Jeff Nippard</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== VIERNES ===== -->
+<div id="day-vie" class="day-panel">
+  <div class="day-header">
+    <div><div class="day-label">Dia 5 — Prioridad #5</div><div class="day-name">VIERNES</div><div class="day-focus">Activacion Pre-Partido — cero fatiga, maximo estado</div></div>
+    <div class="day-meta"><span class="priority-badge p3-badge">COMPLEMENTARIO</span><span class="time-badge">20–25 min</span></div>
+  </div>
+  <div class="miss-alert"><strong>Si perdés este dia</strong>No pasa nada. Llegá 15 min antes al partido. Lo critico es no hacer nada que genere fatiga o DOMS.</div>
+
+  <div class="block b-move open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-header-left"><div class="block-label">Pre-Match Movement Flow</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">22 min</div><div class="toggle-arrow">▼</div></div>
+    </div>
+    <div class="block-body">
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Shin Box Flow — Version Suave</div><div class="ex-sets sets-mob">5 min de movimiento continuo</div></div>
+        <div class="ex-why">Libera la tension de cadera acumulada de la semana. Hoy sin tension maxima — solo exploracion suave y fluidez.</div>
+        <div class="ex-how">Misma secuencia que el martes pero sin buscar el rango maximo. Movimiento fluido, respiracion profunda. Objetivo: soltar tension, no trabajar.</div>
+        <div class="ex-footer"><div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Cualquier posicion de suelo que se sienta bien</span></div></div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">World's Greatest Stretch — Activacion</div><div class="ex-sets sets-mob">2 x 5 reps por lado</div></div>
+        <div class="ex-why">Activa toda la cadena cinetica — tobillo, cadera, toracica — en un patron de movimiento identico al que el partido va a demandar.</div>
+        <div class="ex-how">Misma secuencia que el miercoles pero sin buscar el maximo. Fluidez y activacion, no esfuerzo.</div>
+        <div class="ex-footer"></div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Activacion Gluteo + Tobillo</div><div class="ex-sets sets-mob">2 x 12 Clam Shell + 2 x 10 Calf Raise + Tibialis Raise</div></div>
+        <div class="ex-why">Activa el gluteo medio y la musculatura de tobillo. Un gluteo medio inhibido es el principal factor de riesgo de lesion de rodilla en los primeros 20 minutos del partido.</div>
+        <div class="ex-how">Clam Shell: abrir la rodilla superior sin mover la pelvis. Calf + Tibialis: borde de step o suelo, lento y consciente. Sin carga, sin fatiga.</div>
+        <div class="ex-footer"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===== SABADO ===== -->
+<div id="day-sab" class="day-panel">
+  <div class="day-header">
+    <div><div class="day-label">Dia 6</div><div class="day-name">SABADO</div><div class="day-focus">Dia de Partido</div></div>
+    <div class="day-meta"><span class="priority-badge psat-badge">PARTIDO</span><span class="time-badge">20 min pre + partido + 10 post</span></div>
+  </div>
+  <div class="miss-alert"><strong>Nunca saltear el calentamiento</strong>Aunque llegues tarde, haz las fases 2 y 3 del FIFA 11+. Los desgarros ocurren principalmente en los primeros 15 minutos sin calentamiento.</div>
+
+  <div class="block b-power open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-header-left"><div class="block-label">FIFA 11+ Adaptado — Pre-Partido</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">20 min</div><div class="toggle-arrow">▼</div></div>
+    </div>
+    <div class="block-body">
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Fase 1 — Carrera Progresiva</div><div class="ex-sets">8 min continuos</div></div>
+        <div class="ex-why">Eleva la temperatura muscular y activa el sistema cardiovascular.</div>
+        <div class="ex-how">Trote suave 2 min → rotacion de cadera 2 min → hacia atras 1 min → saltos laterales 1 min → shuffles 1 min → rodillas altas 1 min.</div>
+        <div class="ex-footer"></div>
+      </div>
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Fase 2 — Activacion + Fuerza</div><div class="ex-sets">7 min</div></div>
+        <div class="ex-why">Activa los patrones musculares del partido. El Nordic excentrico en esta fase reduce lesiones hasta un 50%.</div>
+        <div class="ex-how">Sentadillas con salto x10 → Puente gluteo x15 → Plancha 30 seg → Nordic Curl excentrico x5 → Estocada equilibrio x10.</div>
+        <div class="ex-footer"><div class="yt-links"><a class="yt-link" href="https://www.youtube.com/results?search_query=FIFA+11+warm+up" target="_blank">FIFA 11+ Warm Up Protocol</a></div></div>
+      </div>
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Fase 3 — Aceleraciones</div><div class="ex-sets">5 min</div></div>
+        <div class="ex-why">Prepara el SNC para los sprints maximos del partido.</div>
+        <div class="ex-how">3 x 30 metros al 70–80–90%. 2 cambios de direccion explosivos. 1 sprint maximo de 15 metros.</div>
+        <div class="ex-footer"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block b-recover open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-header-left"><div class="block-label">Post-Partido — Vuelta a la Calma</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">10 min</div><div class="toggle-arrow">▼</div></div>
+    </div>
+    <div class="block-body">
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Estiramiento Estatico + Respiracion</div><div class="ex-sets">Secuencia unica</div></div>
+        <div class="ex-why">Post-partido el estiramiento estatico acelera la recuperacion y baja el sistema nervioso simpatico.</div>
+        <div class="ex-how">60 seg cuadriceps por lado → 60 seg isquios → 60 seg figura 4 → 60 seg flexores de cadera → 2 min respiracion diafragmatica (inhala 4, reten 4, exhala 6–8).</div>
+        <div class="ex-footer"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DOMINGO ===== -->
+<div id="day-dom" class="day-panel">
+  <div class="day-header">
+    <div><div class="day-label">Dia 7 — Prioridad #4</div><div class="day-name">DOMINGO</div><div class="day-focus">Full Body Mobility Flow + Recuperacion Activa</div></div>
+    <div class="day-meta"><span class="priority-badge p2-badge">IMPORTANTE</span><span class="time-badge">40–50 min</span></div>
+  </div>
+  <div class="miss-alert"><strong>Si perdés este dia</strong>15 min de Hip Mobility Flow (Shin Box + Hip CARs + Cossack) antes de dormir. Hacelo en el living si hace falta — no requiere equipamiento.</div>
+
+  <!-- DOMINGO: FULL MOBILITY FLOW -->
+  <div class="block b-move open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-header-left"><div class="block-label">Full Body Mobility Flow — Protocolo Largo</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">25 min</div><div class="toggle-arrow">▼</div></div>
+    </div>
+    <div class="block-body">
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Shin Box Flow Completo — Sin Apuro</div><div class="ex-sets sets-mob">10 min de exploracion libre</div></div>
+        <div class="ex-why">El domingo es el momento ideal para el trabajo de movilidad de cadera mas profundo de la semana. El sistema nervioso esta en modo recuperacion y el tejido esta mas receptivo. Vernon dice que este es el trabajo que genera los cambios reales de rango a largo plazo — no los dias de entrenamiento pesado.</div>
+        <div class="ex-how">No hay prisa. Empieza en Shin Box y deja que el cuerpo guie. Explora: lean forward sobre la rodilla delantera, rotacion toracica, hip lift activo, transicion al otro lado. Si encuentras una posicion que se siente tensa, queda ahi mas tiempo. Agrega Cossack Squat lento x5 por lado en el medio. Termina con Hip CARs — 3 rotaciones completas por lado.</div>
+        <div class="flow-card">
+          <div class="flow-card-title">Secuencia Libre Sugerida</div>
+          <div class="flow-steps">
+            <span class="flow-step">Shin Box pasivo 2 min</span><span class="flow-arrow">→</span>
+            <span class="flow-step">Transiciones + rotacion toracica</span><span class="flow-arrow">→</span>
+            <span class="flow-step">Lean forward + hip flexor stretch</span><span class="flow-arrow">→</span>
+            <span class="flow-step">Cossack x5 por lado</span><span class="flow-arrow">→</span>
+            <span class="flow-step">Hip CARs x3 por lado</span><span class="flow-arrow">→</span>
+            <span class="flow-step">Zonas tensas: mas tiempo</span>
+          </div>
+        </div>
+        <div class="ex-footer">
+          <div class="yt-links">
+            <a class="yt-link" href="https://www.youtube.com/watch?v=eU8_Lxdvfc0" target="_blank">Vernon Griffith — Hip & Spine Mobility</a>
+            <a class="yt-link" href="https://www.youtube.com/watch?v=G6z99P_3GPs" target="_blank">Vernon Griffith — Mobility Deep Dive</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Thoracic + Shoulder Flow</div><div class="ex-sets sets-mob">8 min continuos</div></div>
+        <div class="ex-why">Mantiene la movilidad toracica y de hombro ganada durante la semana. Sin esta sesion dominical, la rigidez vuelve parcialmente para el lunes.</div>
+        <div class="ex-how">Secuencia fluida: Thread the Needle x5 por lado → Open Book x5 por lado → Shoulder CARs x3 por lado → Band Pull-Apart x15. No hay descanso entre ejercicios — es un flow continuo.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Si no hay banda:</span><span class="alt-tag">Solo movimientos sin equipamiento</span></div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Ankle + Tibialis — Mantenimiento</div><div class="ex-sets sets-mob">2 x 8 Ankle CARs + 2 x 20 Tibialis Raises</div></div>
+        <div class="ex-why">El tobillo y el tibial anterior se recuperan rapido y el domingo es buen momento para sumar volumen de bajo impacto.</div>
+        <div class="ex-how">Ankle CARs: lentos y completos. Tibialis Raises: sin carga extra hoy, enfocado en el rango.</div>
+        <div class="ex-footer"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ZONA 2 + CIERRE -->
+  <div class="block b-recover open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-header-left"><div class="block-label">Recuperacion Aerobica + Cierre de Semana</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">22 min</div><div class="toggle-arrow">▼</div></div>
+    </div>
+    <div class="block-body">
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Assault Bike o Air Row — Zona 2</div><div class="ex-sets">18–20 min a ritmo conversacional</div></div>
+        <div class="ex-why">Zona 2 post-partido elimina el lactato residual, aumenta el flujo sanguineo a tejidos danados y mejora la base aerobica que sostiene la capacidad de sprint repetido en el partido. No es cardio — es recuperacion activa con beneficio doble.</div>
+        <div class="ex-how">60–65% FC max. Si no podes mantener una conversacion, vas muy rapido. Respiracion nasal si podes — obliga a mantener la intensidad correcta.</div>
+        <div class="ex-footer"><div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Caminata 25 min</span><span class="alt-tag">Natacion suave</span></div></div>
+      </div>
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Respiracion Diafragmatica — Cierre</div><div class="ex-sets">5 min</div></div>
+        <div class="ex-why">Baja el sistema nervioso simpatico, mejora HRV y prepara el cuerpo fisiologicamente para la semana siguiente.</div>
+        <div class="ex-how">Recostado. Mano en abdomen. Inhala nariz 4 seg expandiendo abdomen, reten 4 seg, exhala boca 6–8 seg. La exhalacion larga activa el nervio vago.</div>
+        <div class="ex-footer"><div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Box breathing 4-4-4-4</span></div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+function showDay(day, btn) {
+  document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('day-' + day).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleBlock(header) {
+  header.closest('.block').classList.toggle('open');
+}
+</script>
+</body>
+</html>
