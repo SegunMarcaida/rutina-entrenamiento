@@ -7,8 +7,11 @@ Decision: shift the plan toward performance for football preseason.
 Meaning:
 - Monday is a flexible running selector: football fartlek, pasadas, 5k, or 10k, with football fartlek as the default transfer option and the rule that Tuesday must stay viable.
 - Tuesday is strength-performance: mobility, back squat full ROM for 3 effective sets, tibialis between squat sets, then Nordics + hip flexor work, ATG split squat + weighted Cossack squat, and back extensions + obliques in the same machine.
-- Wednesday is the highest-priority preseason session: indoor power plus mixed VO2 using one machine station, preferably bike or rower, with hang power cleans early while fresh.
-- Thursday is upper-body strength plus shoulder and core: weighted pull-ups + weighted dips 5x5 superset, push press, two rounds of press + row, lateral raises, and strong core with ab wheel.
+- Wednesday is the highest-priority preseason session: Vernon Griffith II "FULL MOBILITY SESSION" warm-up, indoor power plus a Norwegian 4x4 compact-gym circuit, with hang power cleans early while fresh.
+- The Wednesday 4x4 uses no bike, rower, or treadmill, and must fit a crowded indoor gym: 2 m x 2 m station, one kettlebell or two dumbbells, optional low box or mat, compact jumps allowed, floor work allowed, no long shuffles, no high-impact ego jumps, and no dropped weights.
+- Evidence anchor: Helgerud et al. 2001 used 4 x 4 min at 90-95% HRmax with 3-min active recovery in elite junior soccer players and improved soccer match performance markers. The gym circuit is an indoor implementation of that intensity structure: 4 min continuous hard work with only short transitions, not all-out sprints and not a separate proven kettlebell protocol.
+- Tuesday can also use the same 8:34 Vernon mobility video as the full warm-up when hips/adductors feel stiff.
+- Thursday is upper-body calisthenics plus a small barbell dose: skill prep, handstand work, muscle-up progression, weighted pull-ups + weighted dips 5x5, push press 3x3, calisthenics accessories, and a more complete core block with ab wheel, seated psoas lift, Copenhagen plank, and explosive cable rotation.
 - Friday is rest/recovery or catch-up if a gym day was missed.
 - Saturday and Sunday are flexible sport days with load rules.
 

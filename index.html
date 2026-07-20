@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rutina Atletica — Futbol &amp; Performance v7</title>
+<title>Rutina Atletica — Futbol &amp; Performance v14</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>
 :root {
@@ -134,6 +134,10 @@ body { background: var(--white); font-family: 'DM Sans', sans-serif; color: var(
 .flow-steps { display: flex; flex-wrap: wrap; gap: 6px; }
 .flow-step { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.12); padding: 4px 10px; border-radius: 3px; font-size: 12px; }
 .flow-arrow { color: rgba(255,255,255,0.25); font-size: 12px; display: flex; align-items: center; }
+.mobility-order { list-style: none; display: grid; gap: 6px; margin: 10px 0 12px; padding: 0; }
+.mobility-order li { display: grid; grid-template-columns: 54px 1fr; gap: 10px; align-items: start; border: 1px solid rgba(0,0,0,0.08); border-radius: 4px; padding: 7px 10px; background: rgba(255,255,255,0.58); }
+.mobility-time { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--teal); white-space: nowrap; }
+.mobility-move { font-size: 12.5px; line-height: 1.45; color: #222; }
 
 @media (max-width: 640px) {
   .header { padding: 36px 20px 28px; } .header h1 { font-size: 50px; }
@@ -142,13 +146,14 @@ body { background: var(--white); font-family: 'DM Sans', sans-serif; color: var(
   .pt-row { grid-template-columns: 36px 1fr; } .pt-miss { display: none; }
   .day-header { flex-direction: column; } .day-meta { flex-direction: row; align-items: center; }
   .ex-footer { flex-direction: column; } .yt-links { align-items: flex-start; }
+  .mobility-order li { grid-template-columns: 48px 1fr; }
 }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="h-tag">Programa Atletico Personalizado — v7 Pretemporada</div>
+  <div class="h-tag">Programa Atletico Personalizado — v14 Pretemporada</div>
   <h1>STRENGTH,<br>POWER &amp;<br><span>MOVEMENT</span></h1>
   <div class="h-sub">Programa semanal enfocado en llegar volando al proximo torneo: fuerza full ROM, potencia indoor, VO2 mixto, movilidad diaria y dosis justa de ATG para blindaje sin robar velocidad.</div>
   <div class="h-pills">
@@ -171,9 +176,9 @@ body { background: var(--white); font-family: 'DM Sans', sans-serif; color: var(
 
 <div class="priority-table">
   <h2>ORDEN DE PRIORIDAD SEMANAL</h2>
-  <div class="pt-row"><div class="pt-num">1</div><div><div class="pt-day-name">MIERCOLES — Potencia Indoor + VO2 Mixto</div><div class="pt-day-type">Hang Power Clean · Jump Squat · Swing · Bici/Remo · Skater Bounds</div></div><div class="pt-miss">Si lo perdés: 20 min bici/remo + swings + skaters. Cero excusas.</div></div>
+  <div class="pt-row"><div class="pt-num">1</div><div><div class="pt-day-name">MIERCOLES — Potencia Indoor + Norwegian 4x4</div><div class="pt-day-type">Vernon Mobility · Hang Power Clean · Jump Squat · Compact Gym 4x4</div></div><div class="pt-miss">Si lo perdés: movilidad 5 min + 2 rondas 4x4. Cero excusas.</div></div>
   <div class="pt-row"><div class="pt-num">2</div><div><div class="pt-day-name">MARTES — Fuerza Full ROM + Blindaje</div><div class="pt-day-type">Back Squat · Tibialis · Nordic · ATG Split · Cossack · Back Extension</div></div><div class="pt-miss">Si lo perdés: squat 3x5 + Nordic + ATG split. 35 min.</div></div>
-  <div class="pt-row"><div class="pt-num">3</div><div><div class="pt-day-name">JUEVES — Upper Pesado + Hombro + Core</div><div class="pt-day-type">Weighted Dominadas · Weighted Fondos · Push Press · Vuelos · Ruedita</div></div><div class="pt-miss">Si lo perdés: dominadas + fondos 5x5 + ruedita/Pallof.</div></div>
+  <div class="pt-row"><div class="pt-num">3</div><div><div class="pt-day-name">JUEVES — Calistenia Upper + Barra</div><div class="pt-day-type">Vertical · Muscle-Up · Weighted Dominadas · Weighted Fondos · Push Press</div></div><div class="pt-miss">Si lo perdés: dominadas + fondos 5x5 + push press 3x3 + core corto.</div></div>
   <div class="pt-row"><div class="pt-num">4</div><div><div class="pt-day-name">LUNES — Running Flexible</div><div class="pt-day-type">Fartlek futbolero · pasadas · 5k · 10k</div></div><div class="pt-miss">Regla: terminar con piernas para martes.</div></div>
   <div class="pt-row"><div class="pt-num">5</div><div><div class="pt-day-name">VIERNES — Descanso o Recupero</div><div class="pt-day-type">Recuperacion · movilidad · adelantar si fallaste un gym</div></div><div class="pt-miss">No sumar fatiga antes del deporte del finde.</div></div>
   <div class="pt-row"><div class="pt-num">—</div><div><div class="pt-day-name">SABADO — Deporte</div><div class="pt-day-type">Futbol · tenis · 5k · 10k</div></div><div class="pt-miss">Calentar siempre. Futbol manda.</div></div>
@@ -275,7 +280,7 @@ body { background: var(--white); font-family: 'DM Sans', sans-serif; color: var(
   <div class="block b-move open">
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-header-left"><div class="block-label">Movilidad — Tobillo, Cadera y Sentadilla Profunda</div></div>
-      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">8 min</div><div class="toggle-arrow">▼</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">8–9 min</div><div class="toggle-arrow">▼</div></div>
     </div>
     <div class="block-body">
       <div class="exercise">
@@ -292,7 +297,10 @@ body { background: var(--white); font-family: 'DM Sans', sans-serif; color: var(
             <span class="flow-step">Pogos suaves</span>
           </div>
         </div>
-        <div class="ex-footer"></div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Opcion completa:</span><span class="alt-tag">Vernon mobility 8:34 si llegas con cadera dura</span><span class="alt-tag">Orden detallado en Miercoles</span></div>
+          <div class="yt-links"><a class="yt-link" href="https://www.youtube.com/watch?v=M8cF61svkV8" target="_blank">Vernon Griffith II — FULL MOBILITY SESSION</a></div>
+        </div>
       </div>
     </div>
   </div>
@@ -377,30 +385,49 @@ body { background: var(--white); font-family: 'DM Sans', sans-serif; color: var(
   </div>
   <div class="miss-alert">
     <strong>Si perdés este dia</strong>
-    Hacelo version corta: movilidad 5 min, hang power clean 4x3, y 3 bloques VO2 de 4 min con bici/remo + swings + skaters.
+    Hacelo version corta: movilidad 5 min, hang power clean 4x3, y 2 rondas del Norwegian 4x4 compacto.
   </div>
 
   <div class="block b-move open">
     <div class="block-header" onclick="toggleBlock(this)">
-      <div class="block-header-left"><div class="block-label">Movilidad — Preparar Potencia</div></div>
-      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">8 min</div><div class="toggle-arrow">▼</div></div>
+      <div class="block-header-left"><div class="block-label">Movilidad — Vernon Griffith Hip/Groin</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">9 min</div><div class="toggle-arrow">▼</div></div>
     </div>
     <div class="block-body">
       <div class="exercise">
-        <div class="ex-top"><div class="ex-name">Athletic Warm-Up</div><div class="ex-sets sets-mob">2 rondas</div></div>
-        <div class="ex-why">Sube temperatura y deja tobillo/cadera listos para saltos y cleans.</div>
-        <div class="ex-how">Ankle rocks x10 por lado → world's greatest stretch x4 por lado → hip airplanes asistidos x4 por lado → pogos suaves x20 → snap downs x5. Termina con 2 series livianas de clean pull.</div>
+        <div class="ex-top"><div class="ex-name">FULL MOBILITY SESSION</div><div class="ex-sets sets-mob">8:34</div></div>
+        <div class="ex-why">Cadera, aductores y rotacion antes de saltos, cleans y cambios de direccion. Rango activo sin apagar potencia.</div>
+        <div class="ex-how">Segui el video completo con este orden. Mantene intensidad de warm-up, no de estiramiento pasivo. Al terminar: 2 series livianas de clean pull + 3 snap downs para pasar a potencia.</div>
+        <ol class="mobility-order">
+          <li><span class="mobility-time">0:00</span><span class="mobility-move">90/90 hip switches / shin box switches.</span></li>
+          <li><span class="mobility-time">0:45</span><span class="mobility-move">90/90 rotations: cambia de lado sin levantarte.</span></li>
+          <li><span class="mobility-time">1:30</span><span class="mobility-move">90/90 forward lean: torso hacia la pierna delantera.</span></li>
+          <li><span class="mobility-time">2:15</span><span class="mobility-move">Side sit con pierna extendida: carga aductor/hamstring.</span></li>
+          <li><span class="mobility-time">3:05</span><span class="mobility-move">Quadruped adductor rock-back: pierna al costado, cadera atras/adelante.</span></li>
+          <li><span class="mobility-time">3:50</span><span class="mobility-move">Half-kneeling hip flexor + groin shift.</span></li>
+          <li><span class="mobility-time">4:35</span><span class="mobility-move">Frog / half-frog rock-back para aductores.</span></li>
+          <li><span class="mobility-time">5:30</span><span class="mobility-move">Half-kneeling hamstring floss: pierna adelante extendida.</span></li>
+          <li><span class="mobility-time">6:00</span><span class="mobility-move">Hip flexor reach: lunge bajo + brazo arriba.</span></li>
+          <li><span class="mobility-time">6:40</span><span class="mobility-move">Lizard / spiderman flow: manos al piso, cadera baja.</span></li>
+          <li><span class="mobility-time">7:25</span><span class="mobility-move">Low cossack / lateral lunge shift.</span></li>
+          <li><span class="mobility-time">8:15</span><span class="mobility-move">Volver a 90/90 y reset.</span></li>
+        </ol>
         <div class="flow-card">
-          <div class="flow-card-title">Secuencia 8 Min</div>
+          <div class="flow-card-title">Resumen Rapido</div>
           <div class="flow-steps">
-            <span class="flow-step">Ankle</span><span class="flow-arrow">→</span>
-            <span class="flow-step">Lunge + rotacion</span><span class="flow-arrow">→</span>
-            <span class="flow-step">Hip airplane</span><span class="flow-arrow">→</span>
-            <span class="flow-step">Pogos</span><span class="flow-arrow">→</span>
-            <span class="flow-step">Snap down</span>
+            <span class="flow-step">90/90</span><span class="flow-arrow">→</span>
+            <span class="flow-step">Adductors</span><span class="flow-arrow">→</span>
+            <span class="flow-step">Hip flexor</span><span class="flow-arrow">→</span>
+            <span class="flow-step">Hamstring</span><span class="flow-arrow">→</span>
+            <span class="flow-step">Lizard/Cossack</span><span class="flow-arrow">→</span>
+            <span class="flow-step">Clean pull x2</span><span class="flow-arrow">→</span>
+            <span class="flow-step">Snap down x3</span>
           </div>
         </div>
-        <div class="ex-footer"></div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Uso:</span><span class="alt-tag">Miercoles fijo</span><span class="alt-tag">Martes opcional</span></div>
+          <div class="yt-links"><a class="yt-link" href="https://www.youtube.com/watch?v=M8cF61svkV8" target="_blank">Vernon Griffith II — FULL MOBILITY SESSION</a></div>
+        </div>
       </div>
     </div>
   </div>
@@ -438,31 +465,32 @@ body { background: var(--white); font-family: 'DM Sans', sans-serif; color: var(
 
   <div class="block b-acc open">
     <div class="block-header" onclick="toggleBlock(this)">
-      <div class="block-header-left"><div class="block-label">VO2 Mixto — Estacion Unica</div></div>
-      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">18–24 min</div><div class="toggle-arrow">▼</div></div>
+      <div class="block-header-left"><div class="block-label">Norwegian 4x4 — Gym Compacto sin Cardio Machines</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">28 min</div><div class="toggle-arrow">▼</div></div>
     </div>
     <div class="block-body">
-      <div class="section-note">Elegir bici o remo. Dejar una kettlebell/mancuerna al lado. No ocupar medio gimnasio.</div>
+      <div class="section-note">Base probada en futbol: 4 x 4 min fuerte / 3 min activo. Adaptacion indoor: 2 m x 2 m, 1 KB o 2 DB, sin bici, remo ni cinta.</div>
 
       <div class="exercise">
-        <div class="ex-top"><div class="ex-name">Bloque 1 — Bici/Remo + Swings</div><div class="ex-sets sets-pow">6–8 min</div></div>
-        <div class="ex-why">Pulsaciones altas con bisagra explosiva. Simple y brutal.</div>
-        <div class="ex-how">Min impar: 20 seg fuerte en bici/remo + 40 seg suave. Min par: kettlebell swings x10–15 + resto del minuto. Descansa 2 min al terminar.</div>
-        <div class="ex-footer"></div>
-      </div>
-
-      <div class="exercise">
-        <div class="ex-top"><div class="ex-name">Bloque 2 — Bici/Remo + Jump Squat</div><div class="ex-sets sets-pow">6–8 min</div></div>
-        <div class="ex-why">VO2 con potencia de piernas. Fatiga alta, ejecucion simple.</div>
-        <div class="ex-how">Min impar: 20 seg fuerte en bici/remo + 40 seg suave. Min par: DB/KB jump squat x6–8 o squat jump sin peso x8–10 + resto. Descansa 2 min.</div>
-        <div class="ex-footer"></div>
-      </div>
-
-      <div class="exercise">
-        <div class="ex-top"><div class="ex-name">Bloque 3 — Finisher Futbolero</div><div class="ex-sets sets-pow">4–8 min</div></div>
-        <div class="ex-why">Capacidad de repetir esfuerzos altos cuando ya hay fatiga.</div>
-        <div class="ex-how">40 seg bici/remo fuerte → 20 seg transicion → 40 seg skater bounds controlados → 20 seg descanso. Repetir 2–4 vueltas. Si los saltos se ensucian, cambiar por lateral shuffle corto.</div>
-        <div class="ex-footer"></div>
+        <div class="ex-top"><div class="ex-name">Rondas 1–4 — Compact Gym Engine</div><div class="ex-sets sets-pow">4 x 4:00 + 3:00</div></div>
+        <div class="ex-why">Mismo objetivo del 4x4 probado: sostener 90–95% FCmax o RPE 8.5–9. No es sprint all-out: si explotas antes del minuto 4, te pasaste.</div>
+        <div class="ex-how">Cada ronda fuerte dura 4 min continuos: 50s KB swing o DB swing → 10s transicion rapida; 50s salto compacto: lateral pogos sobre una linea o box jump bajo con step-down → 10s transicion rapida; 50s DB clean + push press alternado → 10s transicion rapida; 50s mountain climbers cruzados sobre mat → 10s transicion rapida. Despues: 3 min recuperacion activa caminando suave.</div>
+        <div class="flow-card">
+          <div class="flow-card-title">Una Ronda 4:00</div>
+          <div class="flow-steps">
+            <span class="flow-step">50s swing</span><span class="flow-arrow">→</span>
+            <span class="flow-step">10s transicion</span><span class="flow-arrow">→</span>
+            <span class="flow-step">50s pogo / box jump</span><span class="flow-arrow">→</span>
+            <span class="flow-step">10s transicion</span><span class="flow-arrow">→</span>
+            <span class="flow-step">50s clean + press</span><span class="flow-arrow">→</span>
+            <span class="flow-step">10s transicion</span><span class="flow-arrow">→</span>
+            <span class="flow-step">50s climbers</span><span class="flow-arrow">→</span>
+            <span class="flow-step">10s transicion</span>
+          </div>
+        </div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Regla:</span><span class="alt-tag">RPE 8.5–9</span><span class="alt-tag">4 min sostenibles</span><span class="alt-tag">box bajo</span><span class="alt-tag">step-down</span><span class="alt-tag">no tirar peso</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -472,70 +500,53 @@ body { background: var(--white); font-family: 'DM Sans', sans-serif; color: var(
 <!-- ===== JUEVES ===== -->
 <div id="day-jue" class="day-panel">
   <div class="day-header">
-    <div><div class="day-label">Dia 4 — Prioridad #3</div><div class="day-name">JUEVES</div><div class="day-focus">Upper pesado + hombro explosivo + core fuerte</div></div>
-    <div class="day-meta"><span class="priority-badge p2-badge">IMPORTANTE</span><span class="time-badge">50–60 min</span></div>
+    <div><div class="day-label">Dia 4 — Prioridad #3</div><div class="day-name">JUEVES</div><div class="day-focus">Calistenia upper + barra explosiva + core fuerte</div></div>
+    <div class="day-meta"><span class="priority-badge p2-badge">IMPORTANTE</span><span class="time-badge">65–75 min</span></div>
   </div>
   <div class="miss-alert">
     <strong>Si perdés este dia</strong>
-    Dominadas con peso + fondos con peso 5x5, push press 3x3 y ruedita/Pallof. Si no hay tiempo, saltea press+remo y vuelos.
+    Dominadas con peso + fondos con peso 5x5, push press 3x3 y core corto: ruedita + Copenhagen. Si no hay tiempo, saltea skill largo y accesorios.
   </div>
 
-  <!-- SHOULDER + THORACIC MOBILITY -->
+  <!-- SKILL PREP -->
   <div class="block b-move open">
     <div class="block-header" onclick="toggleBlock(this)">
-      <div class="block-header-left"><div class="block-label">Movilidad — Hombro, Escapula y Toracica</div></div>
-      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">8 min</div><div class="toggle-arrow">▼</div></div>
+      <div class="block-header-left"><div class="block-label">Skill Prep — Munecas, Hombro y Escapula</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">6 min</div><div class="toggle-arrow">▼</div></div>
     </div>
     <div class="block-body">
 
       <div class="exercise">
-        <div class="ex-top"><div class="ex-name">Shoulder CARs — Rotaciones Articulares Controladas</div><div class="ex-sets sets-mob">1 x 3 por lado</div></div>
-        <div class="ex-why">El hombro es la articulacion mas lesionada en deportes de raqueta. Los CARs de hombro mantienen el espacio articular, mejoran el control neuromuscular en rangos finales y reducen el riesgo de desgarro del manguito rotador. Fundamental para tenis, padel y surf.</div>
-        <div class="ex-how">De pie, un brazo pegado al cuerpo. Lentamente lleva el brazo hacia adelante (flexion), luego hacia arriba (elevacion), luego hacia atras (extension), luego hacia abajo completando el circulo completo. En cada grado del recorrido, activa los musculos del hombro como si empujaras contra resistencia. El cuerpo no se mueve — solo el brazo. Al completar, invierte la direccion.</div>
-        <div class="ex-footer">
-          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Apoyado en pared (escápula fija)</span><span class="alt-tag">Con carga liviana (1–2 kg)</span></div>
-          <div class="yt-links">
-            <a class="yt-link" href="https://www.youtube.com/watch?v=5JQ-dHYJFug" target="_blank">Shoulder CARs — tutorial</a>
-          </div>
-        </div>
+        <div class="ex-top"><div class="ex-name">Wrist + Scap + Hollow Prep</div><div class="ex-sets sets-mob">1–2 rondas</div></div>
+        <div class="ex-why">Preparar munecas para vertical, escapulas para traccion/empuje y linea corporal para muscle-up.</div>
+        <div class="ex-how">Wrist rocks x10 adelante/atras + x10 laterales → scap push-ups x10 → scap pull-ups x8 → hollow hold 20s → arch hold 20s. Todo limpio, sin fatiga.</div>
+        <div class="ex-footer"></div>
       </div>
+    </div>
+  </div>
 
+  <!-- CALISTHENICS SKILL -->
+  <div class="block b-power open">
+    <div class="block-header" onclick="toggleBlock(this)">
+      <div class="block-header-left"><div class="block-label">Skill — Vertical + Muscle-Up</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">12–14 min</div><div class="toggle-arrow">▼</div></div>
+    </div>
+    <div class="block-body">
+      <div class="section-note">Skill fresco. Cortar antes de que la tecnica se ensucie.</div>
       <div class="exercise">
-        <div class="ex-top"><div class="ex-name">Thread the Needle — Rotacion Toracica en Cuatro Patas</div><div class="ex-sets sets-mob">1 x 6 por lado</div></div>
-        <div class="ex-why">Movilidad toracica especifica para el press y el pull. La columna toracica rigida te impide extender completamente el hombro en el press overhead y te limita la traccion en las dominadas. Vernon lo usa extensamente con sus atletas de NFL antes del trabajo de tren superior.</div>
-        <div class="ex-how">En cuatro patas, manos bajo hombros, rodillas bajo caderas. Desliza una mano por el suelo pasando por debajo del cuerpo hacia el lado opuesto — el hombro y la cabeza bajan mientras la columna toracica rota. Llega hasta el maximo rango toracico (la cadera no rota). Regresa y abre hacia el techo siguiendo el brazo con la vista. Son dos direcciones en cada rep.</div>
-        <div class="ex-footer">
-          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Con mano en pared al abrir</span><span class="alt-tag">Con rotacion de tobillo añadida</span></div>
-          <div class="yt-links">
-            <a class="yt-link" href="https://www.youtube.com/watch?v=q5jpn1RoJRg" target="_blank">Thread the Needle — thoracic mobility</a>
-          </div>
-        </div>
+        <div class="ex-top"><div class="ex-name">Vertical — Wall Line + Kick-Up</div><div class="ex-sets sets-pow">6–7 min</div></div>
+        <div class="ex-why">Frecuencia y linea. Aprender a apilar muneca-hombro-cadera antes de intentar balance libre.</div>
+        <div class="ex-how">Chest-to-wall hold 2 x 20–40s → toe pulls o shoulder taps 2 x 3–6 → kick-up practice 4–6 intentos. Descanso corto, calidad alta.</div>
+        <div class="ex-footer"></div>
       </div>
-
       <div class="exercise">
-        <div class="ex-top"><div class="ex-name">Open Book — Rotacion Lateral Supina con Cadera Fija</div><div class="ex-sets sets-mob">1 x 5 por lado</div></div>
-        <div class="ex-why">Aislamiento de rotacion toracica en posicion de no-compensacion — la cadera fija obliga a que el movimiento venga de la toracica pura. Excelente para atletas de deportes de rotacion como futbol, tenis y surf.</div>
-        <div class="ex-how">Recostado de lado, rodillas a 90 grados apiladas. Brazos extendidos al frente. Abre el brazo superior hacia el lado opuesto siguiendo con la vista — la columna toracica rota, la cadera se queda fija. Mantene 3 seg en el punto maximo. Regresa. No dejes que la rodilla de arriba levante del suelo.</div>
+        <div class="ex-top"><div class="ex-name">Muscle-Up — False Grip + Transicion</div><div class="ex-sets sets-pow">6–7 min</div></div>
+        <div class="ex-why">Construir el skill sin kipping: grip, tiron alto, soporte y transicion.</div>
+        <div class="ex-how">False grip hang 2 x 15–30s → chest-to-ring/bar pull-up 3 x 3 → low-ring transition 2 x 3–5 → ring support hold 2 x 15–25s.</div>
         <div class="ex-footer">
-          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Con rodillo bajo rodillas</span><span class="alt-tag">Con peso liviano en mano</span></div>
-          <div class="yt-links">
-            <a class="yt-link" href="https://www.youtube.com/watch?v=BbT_7vwHBO0" target="_blank">Open Book — thoracic rotation</a>
-          </div>
+          <div class="ex-alts"><span class="alt-label">Si no hay anillas:</span><span class="alt-tag">barra baja</span><span class="alt-tag">band-assisted transition</span></div>
         </div>
       </div>
-
-      <div class="exercise">
-        <div class="ex-top"><div class="ex-name">Band Pull-Apart + Face Pull — Activacion de Escapula</div><div class="ex-sets sets-mob">1 x 20 + 1 x 15</div></div>
-        <div class="ex-why">Activa los retractores de la escapula y el manguito rotador antes del trabajo de empuje pesado. Previene la postura anteriorizada de hombro que lleva a lesiones en deportes de raqueta.</div>
-        <div class="ex-how"><strong>Pull-Apart:</strong> Banda a la altura del pecho, brazos extendidos. Abre la banda hacia los lados apretando las escapulas. <strong>Face Pull:</strong> Banda anclada alta, tira hacia la cara con los codos altos. Al final del movimiento, rota los antebrazos hacia arriba formando una W.</div>
-        <div class="ex-footer">
-          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">YTW con mancuernas livianas</span><span class="alt-tag">Cable face pull</span></div>
-          <div class="yt-links">
-            <a class="yt-link" href="https://www.youtube.com/watch?v=GPwvS56XWBk" target="_blank">Y Raises + Band Work — hombro bulletproof</a>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 
@@ -543,7 +554,7 @@ body { background: var(--white); font-family: 'DM Sans', sans-serif; color: var(
   <div class="block b-strength open">
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-header-left"><div class="block-label">Superbloque — Dominadas + Fondos con Peso</div></div>
-      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">24–28 min</div><div class="toggle-arrow">▼</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">22–26 min</div><div class="toggle-arrow">▼</div></div>
     </div>
     <div class="block-body">
       <div class="section-note">Alternar A1/A2. No es circuito: descanso 90–120 seg entre ejercicios para cargar pesado.</div>
@@ -568,59 +579,58 @@ body { background: var(--white); font-family: 'DM Sans', sans-serif; color: var(
     </div>
   </div>
 
-  <!-- HOMBRO + ACCESORIOS -->
+  <!-- BARRA + ACCESORIOS CALISTENIA -->
   <div class="block b-hyp open">
     <div class="block-header" onclick="toggleBlock(this)">
-      <div class="block-header-left"><div class="block-label">Hombro + Empuje/Traccion Minimo</div></div>
-      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">20–22 min</div><div class="toggle-arrow">▼</div></div>
+      <div class="block-header-left"><div class="block-label">Barra + Accesorios Calistenia</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">14–16 min</div><div class="toggle-arrow">▼</div></div>
     </div>
     <div class="block-body">
 
-      <div class="section-note">Mas hombro, cero brazos. Press+remo baja a 2 rondas.</div>
+      <div class="section-note">Push press queda fijo. El resto suma hombro y control calistenico.</div>
 
       <div class="exercise">
-        <div class="ex-top"><div class="ex-name">Push Press con Barra</div><div class="ex-sets sets-pow">4 x 3–5</div></div>
+        <div class="ex-top"><div class="ex-name">Push Press con Barra</div><div class="ex-sets sets-pow">3 x 3</div></div>
         <div class="ex-why">Potencia de hombro y transferencia full body. Debe ser explosivo, no una repeticion lenta de press militar.</div>
-        <div class="ex-how">Dip corto, drive agresivo de piernas, barra vertical, bloqueo fuerte. Descanso 90 seg. Corta si la barra deja de moverse rapido.</div>
+        <div class="ex-how">Dip corto, drive agresivo de piernas, barra vertical, bloqueo fuerte. Descanso 90–120 seg. Todas las reps rapidas.</div>
         <div class="ex-footer">
-          <div class="ex-alts"><span class="alt-label">Alternativa:</span><span class="alt-tag">Press militar estricto 3x5</span></div>
+          <div class="ex-alts"><span class="alt-label">Carga:</span><span class="alt-tag">moderada</span><span class="alt-tag">sin grind</span></div>
         </div>
       </div>
 
       <div class="exercise">
-        <div class="ex-top"><div class="ex-name">Press + Remo</div><div class="ex-sets sets-hyp">2 rondas x 8–12</div></div>
-        <div class="ex-why">Volumen minimo para mantener equilibrio sin robar tiempo al hombro y core.</div>
-        <div class="ex-how">Press inclinado con mancuernas x8–10 → remo con mancuerna o polea x10–12. Descanso 60–75 seg. No ir al fallo.</div>
+        <div class="ex-top"><div class="ex-name">Ring Rows + Pike Push-Up</div><div class="ex-sets sets-hyp">3 rondas</div></div>
+        <div class="ex-why">Volumen calistenico para espalda, hombro y control corporal sin meter brazos aislados.</div>
+        <div class="ex-how">Ring rows x8–12 → pike push-up o wall HSPU progression x5–8. Descanso 60–75 seg. Rango limpio.</div>
         <div class="ex-footer">
-          <div class="ex-alts"><span class="alt-label">Opciones:</span><span class="alt-tag">DB incline press</span><span class="alt-tag">Chest-supported row</span><span class="alt-tag">Polea neutra</span></div>
-        </div>
-      </div>
-
-      <div class="exercise">
-        <div class="ex-top"><div class="ex-name">Vuelos Laterales</div><div class="ex-sets sets-hyp">3 x 12–20</div></div>
-        <div class="ex-why">Mas hombro visible y deltoide medio sin fatigar el sistema.</div>
-        <div class="ex-how">Mancuernas o polea. Codos levemente flexionados. Subi hasta linea de hombros, pausa corta, baja controlado. Ultimas reps queman, tecnica igual.</div>
-        <div class="ex-footer">
-          <div class="ex-alts"><span class="alt-label">Variantes:</span><span class="alt-tag">Cable lateral raise</span><span class="alt-tag">Lean-away lateral raise</span></div>
+          <div class="ex-alts"><span class="alt-label">Opciones:</span><span class="alt-tag">inverted row</span><span class="alt-tag">feet-elevated pike</span><span class="alt-tag">wall HSPU negativo</span></div>
         </div>
       </div>
 
     </div>
   </div>
 
-  <!-- CORE FUERTE -->
+  <!-- CORE + COMPRESION -->
   <div class="block b-acc open">
     <div class="block-header" onclick="toggleBlock(this)">
-      <div class="block-header-left"><div class="block-label">Core Fuerte — Anti-Extension y Anti-Rotacion</div></div>
-      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">12–15 min</div><div class="toggle-arrow">▼</div></div>
+      <div class="block-header-left"><div class="block-label">Core Calistenia — Intenso y Completo</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">14–16 min</div><div class="toggle-arrow">▼</div></div>
     </div>
     <div class="block-body">
       <div class="exercise">
-        <div class="ex-top"><div class="ex-name">Ruedita + Pallof + Copenhagen + Carry</div><div class="ex-sets sets-str">3 rondas</div></div>
-        <div class="ex-why">Core que transmite fuerza: no se arquea, no rota de mas y aguanta contacto.</div>
-        <div class="ex-how">Ruedita x6–12 → Pallof press x8–12 por lado → Copenhagen plank 20–30 seg por lado → suitcase carry 20–30 m por lado. Descanso 45–60 seg entre rondas.</div>
+        <div class="ex-top"><div class="ex-name">L-Sit + Ruedita + Psoas Lift + Copenhagen</div><div class="ex-sets sets-str">3 rondas</div></div>
+        <div class="ex-why">Core util para calistenia y futbol: compresion, anti-extension, aductores fuertes y pelvis estable.</div>
+        <div class="ex-how">Tuck L-sit 10–20s → ruedita x6–10 → seated psoas lift en banco x8–12 por lado: pierna arriba, punta del pie contra mancuerna, subir/bajar recto → Copenhagen plank 20–30s por lado. Descanso 45–60 seg entre rondas.</div>
         <div class="ex-footer">
-          <div class="ex-alts"><span class="alt-label">Clave:</span><span class="alt-tag">Lumbar quieta</span><span class="alt-tag">Costillas abajo</span><span class="alt-tag">Carry pesado</span></div>
+          <div class="ex-alts"><span class="alt-label">Psoas lift:</span><span class="alt-tag">sentado en banco</span><span class="alt-tag">punta del pie contra mancuerna</span><span class="alt-tag">subir/bajar pierna recta</span></div>
+        </div>
+      </div>
+      <div class="exercise">
+        <div class="ex-top"><div class="ex-name">Rotacion Explosiva en Polea</div><div class="ex-sets sets-pow">3 x 6–8 por lado</div></div>
+        <div class="ex-why">Potencia rotacional para cambios de direccion, choque, remate y tenis sin cargar la lumbar.</div>
+        <div class="ex-how">Polea a altura pecho/costillas. Postura atletica. Cadera y tronco rotan juntos, brazos largos. Tiron explosivo, vuelta controlada 2 seg. Descanso 30–45 seg por lado.</div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Clave:</span><span class="alt-tag">cadera primero</span><span class="alt-tag">costillas abajo</span><span class="alt-tag">no arquear lumbar</span></div>
         </div>
       </div>
     </div>
