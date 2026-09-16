@@ -122,6 +122,12 @@ body { background: var(--white); font-family: 'DM Sans', sans-serif; color: var(
 .ex-alts { display: flex; gap: 5px; flex-wrap: wrap; align-items: center; }
 .alt-label { font-size: 10px; color: var(--gray); font-family: 'DM Mono', monospace; letter-spacing: 1px; text-transform: uppercase; }
 .alt-tag { background: var(--cream); border: 1px solid var(--gray-light); padding: 2px 8px; border-radius: 3px; font-size: 11px; font-family: 'DM Mono', monospace; color: var(--gray); }
+.variant-list { width: 100%; display: grid; margin-top: 10px; border-top: 1px solid rgba(0,0,0,0.08); }
+.variant-row { display: grid; grid-template-columns: minmax(150px, 0.7fr) 1fr; gap: 14px; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+.variant-row:last-child { border-bottom: none; }
+.variant-name { font-size: 11px; font-weight: 600; color: #252525; }
+.variant-options { display: flex; flex-wrap: wrap; gap: 5px; align-items: flex-start; }
+.variant-option { background: rgba(255,255,255,0.62); border: 1px solid rgba(0,0,0,0.12); border-radius: 3px; padding: 2px 7px; font-family: 'DM Mono', monospace; font-size: 10.5px; color: var(--gray); }
 .yt-links { display: flex; flex-direction: column; gap: 3px; align-items: flex-end; }
 .yt-link { font-size: 11px; font-family: 'DM Mono', monospace; color: #a00; text-decoration: none; white-space: nowrap; }
 .yt-link::before { content: '▶  '; }
@@ -147,6 +153,7 @@ body { background: var(--white); font-family: 'DM Sans', sans-serif; color: var(
   .day-header { flex-direction: column; } .day-meta { flex-direction: row; align-items: center; }
   .ex-footer { flex-direction: column; } .yt-links { align-items: flex-start; }
   .mobility-order li { grid-template-columns: 48px 1fr; }
+  .variant-row { grid-template-columns: 1fr; gap: 4px; }
 }
 </style>
 </head>
@@ -286,7 +293,7 @@ body { background: var(--white); font-family: 'DM Sans', sans-serif; color: var(
       <div class="exercise">
         <div class="ex-top"><div class="ex-name">Lower Joint Flow</div><div class="ex-sets sets-mob">1 ronda continua</div></div>
         <div class="ex-why">Mover, elevar temperatura y comprobar como llegan tobillos, rodillas, caderas y columna antes de cargar.</div>
-        <div class="ex-how">Caminata o bici suave 2 min → ankle CARs x5 por lado → knee circles x8 por lado → hip CARs x4 por lado → shin-box dinamico x6 por lado → cat-cow x6 → sentadilla profunda sin peso x6.</div>
+        <div class="ex-how">Caminata o bici suave 2 min → Ankle CARs x5 por lado → Knee circles x8 por lado → Hip CARs x4 por lado → Shin-box dinamico x6 por lado → Cat-cow x6 → Sentadilla profunda sin peso x6.</div>
         <div class="flow-card">
           <div class="flow-card-title">Orden del dia</div>
           <div class="flow-steps">
@@ -297,7 +304,17 @@ body { background: var(--white); font-family: 'DM Sans', sans-serif; color: var(
             <span class="flow-step">Complementos</span>
           </div>
         </div>
-        <div class="ex-footer"></div>
+        <div class="ex-footer">
+          <div class="variant-list">
+            <div class="variant-row"><div class="variant-name">Caminata o bici suave</div><div class="variant-options"><span class="variant-option">Remo suave</span><span class="variant-option">Eliptico</span></div></div>
+            <div class="variant-row"><div class="variant-name">Ankle CARs</div><div class="variant-options"><span class="variant-option">Ankle rocks</span><span class="variant-option">Movilizacion de tobillo con banda</span></div></div>
+            <div class="variant-row"><div class="variant-name">Knee circles</div><div class="variant-options"><span class="variant-option">Caminata hacia atras</span><span class="variant-option">Extension y flexion dinamica de rodilla</span></div></div>
+            <div class="variant-row"><div class="variant-name">Hip CARs</div><div class="variant-options"><span class="variant-option">Hip openers de pie</span><span class="variant-option">90/90 switches</span></div></div>
+            <div class="variant-row"><div class="variant-name">Shin-box dinamico</div><div class="variant-options"><span class="variant-option">World’s greatest stretch</span><span class="variant-option">Lunge con rotacion</span></div></div>
+            <div class="variant-row"><div class="variant-name">Cat-cow</div><div class="variant-options"><span class="variant-option">Pelvic tilts</span><span class="variant-option">Segmental spinal wave</span></div></div>
+            <div class="variant-row"><div class="variant-name">Sentadilla profunda sin peso</div><div class="variant-options"><span class="variant-option">Squat-to-stand</span><span class="variant-option">Deep squat pry asistido</span></div></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -312,9 +329,18 @@ body { background: var(--white); font-family: 'DM Sans', sans-serif; color: var(
       <div class="exercise">
         <div class="ex-top"><div class="ex-name">Full ROM Lower Circuit</div><div class="ex-sets sets-mob">1 x ejercicio</div></div>
         <div class="ex-why">Trabajar el rango de todo el tren inferior con una pequeña carga que ayude a extenderlo sin gastar potencia.</div>
-        <div class="ex-how">Tibialis raise x15–20 → soleus raise full ROM x12 por lado → puente de gluteo unilateral x8 por lado → ATG split squat x6 por lado → Cossack squat x6 por lado → Jefferson curl x6 → pancake good morning x6.</div>
+        <div class="ex-how">Tibialis raise x15–20 → Soleus raise full ROM x12 por lado → Puente de gluteo unilateral x8 por lado → ATG split squat x6 por lado → Cossack squat x6 por lado → Jefferson curl x6 → Pancake good morning x6.</div>
         <div class="ex-footer">
           <div class="ex-alts"><span class="alt-label">Reglas:</span><span class="alt-tag">Rango activo</span><span class="alt-tag">Carga baja/moderada</span><span class="alt-tag">Sin rebotes</span><span class="alt-tag">Sin buscar fatiga</span></div>
+          <div class="variant-list">
+            <div class="variant-row"><div class="variant-name">Tibialis raise</div><div class="variant-options"><span class="variant-option">Tibialis contra pared</span><span class="variant-option">Dorsiflexion en polea o banda</span></div></div>
+            <div class="variant-row"><div class="variant-name">Soleus raise full ROM</div><div class="variant-options"><span class="variant-option">Soleus sentado en maquina</span><span class="variant-option">Calf raise con rodilla flexionada</span></div></div>
+            <div class="variant-row"><div class="variant-name">Puente de gluteo unilateral</div><div class="variant-options"><span class="variant-option">Hip thrust unilateral</span><span class="variant-option">Hip thrust B-stance</span></div></div>
+            <div class="variant-row"><div class="variant-name">ATG split squat</div><div class="variant-options"><span class="variant-option">Split squat con pie delantero elevado</span><span class="variant-option">Estocada reversa larga</span></div></div>
+            <div class="variant-row"><div class="variant-name">Cossack squat</div><div class="variant-options"><span class="variant-option">Lateral lunge con mancuerna</span><span class="variant-option">Lateral squat con slider</span></div></div>
+            <div class="variant-row"><div class="variant-name">Jefferson curl</div><div class="variant-options"><span class="variant-option">Roll-down segmentado en polea</span><span class="variant-option">Roll-down sentado con disco</span></div></div>
+            <div class="variant-row"><div class="variant-name">Pancake good morning</div><div class="variant-options"><span class="variant-option">Wide-stance Romanian deadlift</span><span class="variant-option">Straddle lift-off</span></div></div>
+          </div>
         </div>
       </div>
     </div>
@@ -323,15 +349,19 @@ body { background: var(--white); font-family: 'DM Sans', sans-serif; color: var(
   <div class="block b-power open">
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-header-left"><div class="block-label">Potencia Cargada</div></div>
-      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">10–12 min</div><div class="toggle-arrow">▼</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">8–10 min</div><div class="toggle-arrow">▼</div></div>
     </div>
     <div class="block-body">
       <div class="exercise">
-        <div class="ex-top"><div class="ex-name">Hang Power Clean + Split Squat Jump</div><div class="ex-sets sets-pow">3 rondas</div></div>
+        <div class="ex-top"><div class="ex-name">Hang Power Clean + Split Squat Jump</div><div class="ex-sets sets-pow">2 rondas</div></div>
         <div class="ex-why">Producir fuerza rapido con carga: extension potente bilateral y salida unilateral.</div>
         <div class="ex-how"><strong>A1 — Hang power clean:</strong> 2–3 reps con carga que mantenga la barra rapida. <strong>A2 — Split squat jump con mancuernas:</strong> 3 reps por lado, pierna fija, sin cambio en el aire. Empeza con 5–10% de tu peso corporal total. Descansa 20–30 seg entre ejercicios y 2 min al completar la ronda.</div>
         <div class="ex-footer">
           <div class="ex-alts"><span class="alt-label">Cortar si:</span><span class="alt-tag">barra lenta</span><span class="alt-tag">aterrizaje inestable</span><span class="alt-tag">piernas pesadas</span></div>
+          <div class="variant-list">
+            <div class="variant-row"><div class="variant-name">Potencia Variante A</div><div class="variant-options"><span class="variant-option">Clean pull desde bloques · 3 reps</span><span class="variant-option">Step-up explosivo con mancuernas · 3/lado</span></div></div>
+            <div class="variant-row"><div class="variant-name">Potencia Variante B</div><div class="variant-options"><span class="variant-option">Trap-bar jump · 3 reps</span><span class="variant-option">Landmine reverse lunge con knee drive explosivo · 4/lado</span></div></div>
+          </div>
         </div>
       </div>
     </div>
@@ -340,15 +370,19 @@ body { background: var(--white); font-family: 'DM Sans', sans-serif; color: var(
   <div class="block b-strength open">
     <div class="block-header" onclick="toggleBlock(this)">
       <div class="block-header-left"><div class="block-label">Fuerza Pura</div></div>
-      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">18–20 min</div><div class="toggle-arrow">▼</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="block-duration">14–18 min</div><div class="toggle-arrow">▼</div></div>
     </div>
     <div class="block-body">
       <div class="exercise">
-        <div class="ex-top"><div class="ex-name">Back Squat Profundo</div><div class="ex-sets sets-str">4 x 2–3</div></div>
+        <div class="ex-top"><div class="ex-name">Back Squat Profundo</div><div class="ex-sets sets-str">3 x 2–3</div></div>
         <div class="ex-why">Bloque principal de fuerza de piernas en rango completo. Volumen bajo para no llegar vacio al sabado.</div>
         <div class="ex-how">Hace 2–4 series de aproximacion. En las efectivas usa RPE 8–9, descansa 3–4 min y conserva una repeticion limpia en reserva. Subi rapido sin perder profundidad ni postura. Nunca fallo ni repeticion trabada.</div>
         <div class="ex-footer">
           <div class="ex-alts"><span class="alt-label">Prioridad:</span><span class="alt-tag">rango solido</span><span class="alt-tag">barra rapida</span><span class="alt-tag">3–4 min descanso</span></div>
+          <div class="variant-list">
+            <div class="variant-row"><div class="variant-name">Fuerza Variante A</div><div class="variant-options"><span class="variant-option">Front squat profundo · 3 x 2–3</span></div></div>
+            <div class="variant-row"><div class="variant-name">Fuerza Variante B</div><div class="variant-options"><span class="variant-option">Trap-bar deadlift con manijas bajas · 3 x 2–3</span></div></div>
+          </div>
         </div>
       </div>
     </div>
@@ -366,6 +400,10 @@ body { background: var(--white); font-family: 'DM Sans', sans-serif; color: var(
         <div class="ex-how"><strong>A1 — Nordic:</strong> 3–5 reps, bajada controlada y ayuda de manos para volver. <strong>A2 — Reverse Nordic:</strong> 6–8 reps, cuerpo alineado desde rodillas a cabeza, rango sin dolor. Descansa 90–120 seg por ronda.</div>
         <div class="ex-footer">
           <div class="ex-alts"><span class="alt-label">Regla:</span><span class="alt-tag">1 rep en reserva</span><span class="alt-tag">rango progresivo</span></div>
+          <div class="variant-list">
+            <div class="variant-row"><div class="variant-name">Rodilla Variante A</div><div class="variant-options"><span class="variant-option">Leg curl sentado · 6–8</span><span class="variant-option">Sissy squat asistido · 6–8</span></div></div>
+            <div class="variant-row"><div class="variant-name">Rodilla Variante B</div><div class="variant-options"><span class="variant-option">Sliding leg curl unilateral · 6–8/lado</span><span class="variant-option">Cyclist squat con talones elevados · 6–8</span></div></div>
+          </div>
         </div>
       </div>
     </div>
@@ -381,7 +419,13 @@ body { background: var(--white); font-family: 'DM Sans', sans-serif; color: var(
         <div class="ex-top"><div class="ex-name">Back Extension + QL Extension Lateral</div><div class="ex-sets sets-str">2 rondas</div></div>
         <div class="ex-why">Cerrar con cadera, espalda y estabilidad lateral usando el mismo banco a 35 grados.</div>
         <div class="ex-how"><strong>B1 — Back extension:</strong> 8–12 reps con plato al pecho, subir solo hasta quedar alineado. <strong>B2 — QL extension lateral:</strong> 8–12 reps por lado, pelvis estable y sin rotar. Descansa 60–90 seg por ronda.</div>
-        <div class="ex-footer"><div class="ex-alts"><span class="alt-label">Clave:</span><span class="alt-tag">mismo banco 35°</span><span class="alt-tag">carga moderada</span><span class="alt-tag">sin hiperextension</span></div></div>
+        <div class="ex-footer">
+          <div class="ex-alts"><span class="alt-label">Clave:</span><span class="alt-tag">mismo banco 35°</span><span class="alt-tag">carga moderada</span><span class="alt-tag">sin hiperextension</span></div>
+          <div class="variant-list">
+            <div class="variant-row"><div class="variant-name">Posterior Variante A</div><div class="variant-options"><span class="variant-option">Romanian deadlift · 6–8</span><span class="variant-option">Suitcase carry pesado · 30–40 m/lado</span></div></div>
+            <div class="variant-row"><div class="variant-name">Posterior Variante B — Solo polea</div><div class="variant-options"><span class="variant-option">Cable pull-through · 10</span><span class="variant-option">Side bend unilateral en polea · 10/lado</span></div></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
